@@ -11,22 +11,22 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepository {
   // Attributes
-  private HashMap<Integer, User> users;
+  private HashMap<Integer, User> mapUsers;
   
   // Constructor
   public UserRepository() {}
 
   // Methods
   public List<User> findAll() {
-    return new ArrayList<>(users.values());
+    return new ArrayList<>(mapUsers.values());
   }
 
   public User findById(int id) {
-    return users.get(id);
+    return mapUsers.get(id);
   }
 
   public User findByUserName(String userName) {
-    for (User u: users.values()) {
+    for (User u: mapUsers.values()) {
       if (u.getUserName() == userName) {
         return u;
       }
@@ -36,13 +36,13 @@ public class UserRepository {
   }
 
   public boolean saveUser(User user) {
-    if (users.containsKey(user.getId())) return false;
+    if (mapUsers.containsKey(user.getId())) return false;
 
-    users.put(user.getId(), user);
+    mapUsers.put(user.getId(), user);
     return true;
   }
 
   public boolean deleteUser(User user) {
-    return users.remove(user.getId()) != null;
+    return mapUsers.remove(user.getId()) != null;
   }
 }

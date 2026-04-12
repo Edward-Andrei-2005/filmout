@@ -10,7 +10,7 @@ public class Event {
     private Movie movie;
     private LocalDateTime date;
     private String location, description;
-    private ArrayList<User> ListAttendees;
+    private ArrayList<User> listAttendees;
     private boolean isFull;
 
     // Constructor
@@ -23,7 +23,7 @@ public class Event {
         this.date = date;
         this.location = location;
         this.description = description;
-        this.ListAttendees = new ArrayList<>();
+        this.listAttendees = new ArrayList<>();
         this.isFull = false; // Min number of attendees must be 2
 
         // Add the admin to the attendees list
@@ -73,10 +73,10 @@ public class Event {
         this.description = description;
     }
     public ArrayList<User> getListAttendees() {
-        return ListAttendees;
+        return listAttendees;
     }
     public void setListAttendees(ArrayList<User> listAttendees) {
-        ListAttendees = listAttendees;
+        this.listAttendees = listAttendees;
     }
     public boolean isFull() {
         return isFull;
@@ -95,7 +95,7 @@ public class Event {
                 ", date=" + date +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
-                ", ListAttendees=" + ListAttendees +
+                ", ListAttendees=" + listAttendees +
                 ", isFull=" + isFull +
                  '}';
     }
