@@ -3,11 +3,11 @@ package group02.filmout.entity;
 public class User {
     // Attributes
     private int id;
-    private String name, password, email;
+    private String userName, password, email;
 
     // Constructor
-    public User(String name, String password, String email) {
-        this.name = name;
+    public User(String userName, String password, String email) {
+        this.userName = userName;
         this.password = password;
         this.email = email;
     }
@@ -19,11 +19,11 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     public String getPassword() {
         return password;
@@ -42,7 +42,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
