@@ -3,17 +3,17 @@ package group02.filmout.entity;
 public class Movie {
   // Attributes
   private int id, duration, year, grade;
-  private String title, gender, description, cover;
+  private String title, genre, description, cover;
 
   // Constructor
-  public Movie(int id, int duration, int year, int grade, String title, String gender,
+  public Movie(int id, int duration, int year, int grade, String title, String genre,
       String description, String cover) {
     this.id = id;
     this.duration = duration;
     this.year = year;
     this.grade = grade;
     this.title = title;
-    this.gender = gender;
+    this.genre = genre;
     this.description = description;
     this.cover = cover;
   }
@@ -59,12 +59,12 @@ public class Movie {
     this.title = title;
   }
 
-  public String getGender() {
-    return gender;
+  public String getGenre() {
+    return genre;
   }
 
-  public void setGender(String gender) {
-    this.gender = gender;
+  public void setGenre(String genre) {
+    this.genre = genre;
   }
 
   public String getDescription() {
@@ -91,7 +91,7 @@ public class Movie {
         ", year=" + year +
         ", grade=" + grade +
         ", title='" + title + '\'' +
-        ", gender='" + gender + '\'' +
+        ", gender='" + genre + '\'' +
         ", description='" + description + '\'' +
         ", cover='" + cover + '\'' +
         '}';
