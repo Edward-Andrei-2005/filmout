@@ -7,8 +7,7 @@ public class Cinema {
 
   // Constructor
   public Cinema() {};
-  public Cinema(int id, String name, String latitude, String longitude) {
-    this.id = id;
+  public Cinema(String name, String latitude, String longitude) {
     this.name = name;
     this.latitude = latitude;
     this.longitude = longitude;

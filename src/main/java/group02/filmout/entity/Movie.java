@@ -7,9 +7,8 @@ public class Movie {
 
   // Constructor
   public Movie() {};
-  public Movie(int id, int duration, int year, int grade, String title, String genre,
+  public Movie(int duration, int year, int grade, String title, String genre,
       String description, String cover) {
-    this.id = id;
     this.duration = duration;
     this.year = year;
     this.grade = grade;

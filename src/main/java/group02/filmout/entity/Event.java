@@ -15,9 +15,8 @@ public class Event {
 
     // Constructor
     public Event() {};
-    public Event(int id, int maxAttendees, User admin, Movie movie, LocalDateTime date, 
+    public Event(int maxAttendees, User admin, Movie movie, LocalDateTime date, 
         String location, String description) {
-        this.id = id;
         this.maxAttendees = maxAttendees;
         this.admin = admin;
         this.movie = movie;

@@ -9,8 +9,7 @@ public class Review {
 
   // Constructor
   public Review() {};
-  public Review(int id, User user, Movie movie, float grade) {
-    this.id = id;
+  public Review(User user, Movie movie, float grade) {
     this.user = user;
     this.movie = movie;
     this.grade = grade;
