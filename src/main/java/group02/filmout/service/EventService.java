@@ -1,6 +1,9 @@
 package group02.filmout.service;
 
 import group02.filmout.entity.Event;
+import group02.filmout.repository.EventRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Map;
@@ -9,36 +12,30 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class EventService {
-
-    private Map<Integer, Event> events = new ConcurrentHashMap<>();
-    private AtomicInteger nextId = new AtomicInteger(1);
+    //Attributes
+    @Autowired
+    private EventRepository eventRepository;
 
     // CRUD
-
-
     public Event save(Event event) {
-        if (event.getId() == 0) {
-            event.setId(nextId.getAndIncrement());
-        }
-        events.put(event.getId(), event);
-        return event;
+        return eventRepository.save(event);
     }
 
     public Collection<Event> findAll() {
-        return events.values();
+        return eventRepository.findAll();
     }
 
     public Event findById(int id) {
-        return events.get(id);
+        return eventRepository.findById(id);
     }
 
-    public Event deleteById(int id) {
-        return events.remove(id);
+    public boolean deleteById(int id) {
+        return eventRepository.deleteEvent(id);
     }
 
     //PATCH
     public Event patch(int id, Event updatedFields) {
-        Event existingEvent = events.get(id);
+        Event existingEvent = eventRepository.findById(id);
         if (existingEvent != null) {
             if (updatedFields.getMaxAttendees() != 0) {
                 existingEvent.setMaxAttendees(updatedFields.getMaxAttendees());
@@ -55,6 +52,6 @@ public class EventService {
             // Al ser un booleano primitivo, se actualiza el estado actual
             existingEvent.setFull(updatedFields.isFull());
         }
-        return existingEvent;
+        return eventRepository.save(existingEvent);
     }
 }

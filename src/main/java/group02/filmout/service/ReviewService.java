@@ -1,6 +1,8 @@
 package group02.filmout.service;
 
 import group02.filmout.entity.Review;
+import group02.filmout.repository.ReviewRepository;
+
 import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Map;
@@ -10,35 +12,31 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class ReviewService {
 
-    private Map<Integer, Review> reviews = new ConcurrentHashMap<>();
-    private AtomicInteger nextId = new AtomicInteger(1);
+    // Attributes
+    private ReviewRepository reviewRepository;
 
     // CRUD
 
 
     public Review save(Review review) {
-        if (review.getId() == 0) {
-            review.setId(nextId.getAndIncrement());
-        }
-        reviews.put(review.getId(), review);
-        return review;
+        return reviewRepository.save(review);
     }
 
     public Collection<Review> findAll() {
-        return reviews.values();
+        return reviewRepository.findAll();
     }
 
     public Review findById(int id) {
-        return reviews.get(id);
+        return reviewRepository.findById(id);
     }
 
-    public Review deleteById(int id) {
-        return reviews.remove(id);
+    public boolean deleteById(int id) {
+        return reviewRepository.deleteReview(id);
     }
 
     //PATCH
     public Review patch(int id, Review updatedFields) {
-        Review existingReview = reviews.get(id);
+        Review existingReview = reviewRepository.findById(id);
         if (existingReview != null) {
             if (updatedFields.getGrade() != 0) {
                 existingReview.setGrade(updatedFields.getGrade());
@@ -51,6 +49,6 @@ public class ReviewService {
                 existingReview.setMovie(updatedFields.getMovie());
             }
         }
-        return existingReview;
+        return reviewRepository.save(existingReview);
     }
 }

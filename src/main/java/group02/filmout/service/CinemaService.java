@@ -1,6 +1,9 @@
 package group02.filmout.service;
 
 import group02.filmout.entity.Cinema;
+import group02.filmout.repository.CinemaRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Map;
@@ -10,35 +13,30 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class CinemaService {
 
-    private Map<Integer, Cinema> cinemas = new ConcurrentHashMap<>();
-    private AtomicInteger nextId = new AtomicInteger(1);
+    // Attributes
+    @Autowired
+    private CinemaRepository cinemaRepository;
 
     // CRUD
-
-
     public Cinema save(Cinema cinema) {
-        if (cinema.getId() == 0) {
-            cinema.setId(nextId.getAndIncrement());
-        }
-        cinemas.put(cinema.getId(), cinema);
-        return cinema;
+        return cinemaRepository.save(cinema);
     }
 
     public Collection<Cinema> findAll() {
-        return cinemas.values();
+        return cinemaRepository.findAll();
     }
 
     public Cinema findById(int id) {
-        return cinemas.get(id);
+        return cinemaRepository.findById(id);
     }
 
-    public Cinema deleteById(int id) {
-        return cinemas.remove(id);
+    public boolean deleteById(int id) {
+        return cinemaRepository.deleteCinema(id);
     }
 
     //PATCH
     public Cinema patch(int id, Cinema updatedFields) {
-        Cinema existingCinema = cinemas.get(id);
+        Cinema existingCinema = cinemaRepository.findById(id);
         if (existingCinema != null) {
             if (updatedFields.getName() != null) {
                 existingCinema.setName(updatedFields.getName());
@@ -50,6 +48,6 @@ public class CinemaService {
                 existingCinema.setLongitude(updatedFields.getLongitude());
             }
         }
-        return existingCinema;
+        return cinemaRepository.save(existingCinema);
     }
 }

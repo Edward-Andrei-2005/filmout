@@ -1,6 +1,8 @@
 package group02.filmout.service;
 
 import group02.filmout.entity.Movie;
+import group02.filmout.repository.MovieRepository;
+
 import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Map;
@@ -10,35 +12,29 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class MovieService {
 
-    private Map<Integer, Movie> movies = new ConcurrentHashMap<>();
-    private AtomicInteger nextId = new AtomicInteger(1);
+    // Attributes
+    private MovieRepository movieRepository;
 
     // CRUD
-
-
     public Movie save(Movie movie) {
-        if (movie.getId() == 0) {
-            movie.setId(nextId.getAndIncrement());
-        }
-        movies.put(movie.getId(), movie);
-        return movie;
+        return movieRepository.save(movie);
     }
 
     public Collection<Movie> findAll() {
-        return movies.values();
+        return movieRepository.findAll();
     }
 
     public Movie findById(int id) {
-        return movies.get(id);
+        return movieRepository.findById(id);
     }
 
-    public Movie deleteById(int id) {
-        return movies.remove(id);
+    public boolean deleteById(int id) {
+        return movieRepository.deleteMovie(id);
     }
 
     //PATCH
     public Movie patch(int id, Movie updatedFields) {
-        Movie existingMovie = movies.get(id);
+        Movie existingMovie = movieRepository.findById(id);
         if (existingMovie != null) {
             if (updatedFields.getTitle() != null) existingMovie.setTitle(updatedFields.getTitle());
             if (updatedFields.getGender() != null) existingMovie.setGender(updatedFields.getGender());
@@ -48,6 +44,6 @@ public class MovieService {
             if (updatedFields.getYear() != 0) existingMovie.setYear(updatedFields.getYear());
             if (updatedFields.getGrade() != 0) existingMovie.setGrade(updatedFields.getGrade());
         }
-        return existingMovie;
+        return movieRepository.save(existingMovie);
     }
 }

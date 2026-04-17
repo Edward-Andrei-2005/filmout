@@ -1,6 +1,8 @@
 package group02.filmout.service;
 
 import group02.filmout.entity.User;
+import group02.filmout.repository.UserRepository;
+
 import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Map;
@@ -10,35 +12,30 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class UserService {
 
-    private Map<Integer, User> users = new ConcurrentHashMap<>();
-    private AtomicInteger nextId = new AtomicInteger(1);
+    // Attributes
+    private UserRepository userRepository;
 
     // CRUD
 
-
     public User save(User user) {
-        if (user.getId() == 0) {
-            user.setId(nextId.getAndIncrement());
-        }
-        users.put(user.getId(), user);
-        return user;
+        return userRepository.save(user);
     }
 
     public Collection<User> findAll() {
-        return users.values();
+        return userRepository.findAll();
     }
 
     public User findById(int id) {
-        return users.get(id);
+        return userRepository.findById(id);
     }
 
-    public User deleteById(int id) {
-        return users.remove(id);
+    public boolean deleteById(int id) {
+        return userRepository.deleteUser(id);
     }
 
     //PATCH
     public User patch(int id, User updatedFields) {
-        User existingUser = users.get(id);
+        User existingUser = userRepository.findById(id);
         if (existingUser != null) {
             if (updatedFields.getUserName() != null) {
                 existingUser.setUserName(updatedFields.getUserName());
@@ -50,6 +47,6 @@ public class UserService {
                 existingUser.setPassword(updatedFields.getPassword());
             }
         }
-        return existingUser;
+        return userRepository.save(existingUser);
     }
 }
