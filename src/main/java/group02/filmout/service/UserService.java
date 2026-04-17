@@ -5,9 +5,6 @@ import group02.filmout.repository.UserRepository;
 
 import org.springframework.stereotype.Service;
 import java.util.Collection;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class UserService {
