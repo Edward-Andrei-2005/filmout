@@ -1,4 +1,4 @@
-package group02.filmout.controler;
+package group02.filmout.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
