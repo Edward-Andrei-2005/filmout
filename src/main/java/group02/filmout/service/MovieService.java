@@ -41,7 +41,7 @@ public class MovieService {
         Movie existingMovie = movies.get(id);
         if (existingMovie != null) {
             if (updatedFields.getTitle() != null) existingMovie.setTitle(updatedFields.getTitle());
-            if (updatedFields.getGenre() != null) existingMovie.setGenre(updatedFields.getGenre());
+            if (updatedFields.getGender() != null) existingMovie.setGender(updatedFields.getGender());
             if (updatedFields.getDescription() != null) existingMovie.setDescription(updatedFields.getDescription());
             if (updatedFields.getCover() != null) existingMovie.setCover(updatedFields.getCover());
             if (updatedFields.getDuration() != 0) existingMovie.setDuration(updatedFields.getDuration());
