@@ -14,7 +14,7 @@ import group02.filmout.entity.Movie;
 @Repository
 public class ReviewRepository {
   // Attributes
-  private HashMap<Integer, Review> mapReviews;
+  private HashMap<Integer, Review> mapReviews = new HashMap<>();
   private AtomicInteger nextId = new AtomicInteger(1);
 
   // Constructor

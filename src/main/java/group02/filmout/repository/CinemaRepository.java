@@ -13,7 +13,7 @@ import group02.filmout.entity.Cinema;
 public class CinemaRepository {
 
   // Attributes
-  private HashMap<Integer, Cinema> mapCinemas;
+  private HashMap<Integer, Cinema> mapCinemas = new HashMap<>();
   private AtomicInteger nextId = new AtomicInteger(1);
 
   // Constructor

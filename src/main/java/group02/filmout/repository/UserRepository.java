@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepository {
   // Attributes
-  private HashMap<Integer, User> mapUsers;
+  private HashMap<Integer, User> mapUsers = new HashMap<>();
   private AtomicInteger nextId = new AtomicInteger(1);
   
   // Constructor
@@ -25,7 +25,7 @@ public class UserRepository {
     } 
     mapUsers.put(user.getId(), user); return user; 
   }
-  
+
   public List<User> findAll() {
     return new ArrayList<>(mapUsers.values());
   }

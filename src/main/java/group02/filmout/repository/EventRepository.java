@@ -14,7 +14,7 @@ import group02.filmout.entity.User;
 @Repository
 public class EventRepository {
   // Attributes
-  private HashMap<Integer, Event> mapEvents;
+  private HashMap<Integer, Event> mapEvents = new HashMap<>();
   private AtomicInteger nextId = new AtomicInteger(1);
   
   // Constructor
