@@ -36,7 +36,7 @@ public class UserRepository {
 
   public User findByUserName(String userName) {
     for (User u: mapUsers.values()) {
-      if (u.getUserName() == userName) {
+      if (u.getUserName().equalsIgnoreCase(userName)) {
         return u;
       }
     }
@@ -54,7 +54,7 @@ public class UserRepository {
   /*public boolean deleteUser(User user) {
     return mapUsers.remove(user.getId()) != null;
   }*/
- 
+
   public boolean deleteUser(int id) {
     return mapUsers.remove(id) != null;
   }
