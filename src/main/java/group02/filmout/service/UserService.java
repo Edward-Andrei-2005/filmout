@@ -1,10 +1,11 @@
 package group02.filmout.service;
 
-import group02.filmout.entity.User;
-import group02.filmout.repository.UserRepository;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
-import java.util.Collection;
+
+import group02.filmout.entity.User;
+import group02.filmout.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -13,12 +14,11 @@ public class UserService {
     private UserRepository userRepository;
 
     // CRUD
-
     public User save(User user) {
         return userRepository.save(user);
     }
 
-    public Collection<User> findAll() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 

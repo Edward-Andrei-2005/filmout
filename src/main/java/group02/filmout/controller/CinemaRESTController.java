@@ -29,7 +29,7 @@ public class CinemaRESTController {
     // GET /api/cinemas
     @GetMapping
     public List<Cinema> getAll() {
-        return (List<Cinema>) cinemaService.findAll();
+        return cinemaService.findAll();
     }
 
     // ─── READ (uno) ──────────────────────────────────────────────

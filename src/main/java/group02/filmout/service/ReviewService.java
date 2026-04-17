@@ -1,10 +1,11 @@
 package group02.filmout.service;
 
-import group02.filmout.entity.Review;
-import group02.filmout.repository.ReviewRepository;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
-import java.util.Collection;
+
+import group02.filmout.entity.Review;
+import group02.filmout.repository.ReviewRepository;
 
 @Service
 public class ReviewService {
@@ -13,13 +14,11 @@ public class ReviewService {
     private ReviewRepository reviewRepository;
 
     // CRUD
-
-
     public Review save(Review review) {
         return reviewRepository.save(review);
     }
 
-    public Collection<Review> findAll() {
+    public List<Review> findAll() {
         return reviewRepository.findAll();
     }
 

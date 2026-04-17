@@ -21,10 +21,12 @@ public class MovieRepository {
 
   // Methods
   public Movie save(Movie movie) {
-    if (movie.getId() == 0) { 
-      movie.setId(nextId.getAndIncrement()); 
-    } 
-    mapMovies.put(movie.getId(), movie); return movie; }
+    if (movie.getId() == 0) {
+      movie.setId(nextId.getAndIncrement());
+    }
+    mapMovies.put(movie.getId(), movie);
+    return movie;
+  }
 
   public List<Movie> findAll() {
     return new ArrayList<>(mapMovies.values());
@@ -55,19 +57,7 @@ public class MovieRepository {
     return aux;
   }
 
-  /*public boolean saveMovie(Movie movie) {
-    if (mapMovies.containsKey(movie.getId()))
-      return false;
-
-    mapMovies.put(movie.getId(), movie);
-    return true;
-  }*/
-
-  /*public boolean deleteMovie(Movie movie) {
-    return mapMovies.remove(movie.getId()) != null;
-  }*/
-
- public boolean deleteMovie(int id) {
+  public boolean deleteMovie(int id) {
     return mapMovies.remove(id) != null;
- }
+  }
 }

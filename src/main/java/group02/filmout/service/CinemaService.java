@@ -1,11 +1,12 @@
 package group02.filmout.service;
 
-import group02.filmout.entity.Cinema;
-import group02.filmout.repository.CinemaRepository;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
+
+import group02.filmout.entity.Cinema;
+import group02.filmout.repository.CinemaRepository;
 
 @Service
 public class CinemaService {
@@ -19,7 +20,7 @@ public class CinemaService {
         return cinemaRepository.save(cinema);
     }
 
-    public Collection<Cinema> findAll() {
+    public List<Cinema> findAll() {
         return cinemaRepository.findAll();
     }
 

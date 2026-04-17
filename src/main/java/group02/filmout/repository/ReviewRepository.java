@@ -7,9 +7,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.stereotype.Repository;
 
+import group02.filmout.entity.Movie;
 import group02.filmout.entity.Review;
 import group02.filmout.entity.User;
-import group02.filmout.entity.Movie;
 
 @Repository
 public class ReviewRepository {
@@ -18,15 +18,18 @@ public class ReviewRepository {
   private AtomicInteger nextId = new AtomicInteger(1);
 
   // Constructor
-  public ReviewRepository() {};
+  public ReviewRepository() {
+  };
 
   // Methods
-  public Review save(Review review) { 
-    if (review.getId() == 0) { 
-      review.setId(nextId.getAndIncrement()); 
-    } 
-    mapReviews.put(review.getId(), review); return review; }
-    
+  public Review save(Review review) {
+    if (review.getId() == 0) {
+      review.setId(nextId.getAndIncrement());
+    }
+    mapReviews.put(review.getId(), review);
+    return review;
+  }
+
   public List<Review> findAll() {
     return new ArrayList<>(mapReviews.values());
   }
@@ -59,17 +62,6 @@ public class ReviewRepository {
     return aux;
   }
 
-  /*public boolean saveReview(Review review) {
-    if (mapReviews.containsKey(review.getId())) return false;
-
-    mapReviews.put(review.getId(), review);
-    return true;
-  }*/
-
-  /*public boolean deleteReview(Review review) {
-    return mapReviews.remove(review.getId()) != null;
-  }*/
- 
   public boolean deleteReview(int id) {
     return mapReviews.remove(id) != null;
   }

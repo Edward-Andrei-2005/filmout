@@ -1,10 +1,11 @@
 package group02.filmout.service;
 
-import group02.filmout.entity.Movie;
-import group02.filmout.repository.MovieRepository;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
-import java.util.Collection;
+
+import group02.filmout.entity.Movie;
+import group02.filmout.repository.MovieRepository;
 
 @Service
 public class MovieService {
@@ -17,7 +18,7 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
-    public Collection<Movie> findAll() {
+    public List<Movie> findAll() {
         return movieRepository.findAll();
     }
 

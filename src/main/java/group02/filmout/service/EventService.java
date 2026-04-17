@@ -1,11 +1,12 @@
 package group02.filmout.service;
 
-import group02.filmout.entity.Event;
-import group02.filmout.repository.EventRepository;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
+
+import group02.filmout.entity.Event;
+import group02.filmout.repository.EventRepository;
 
 @Service
 public class EventService {
@@ -18,7 +19,7 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-    public Collection<Event> findAll() {
+    public List<Event> findAll() {
         return eventRepository.findAll();
     }
 

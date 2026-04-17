@@ -17,14 +17,18 @@ public class CinemaRepository {
   private AtomicInteger nextId = new AtomicInteger(1);
 
   // Constructor
-  public CinemaRepository() {};
+  public CinemaRepository() {
+  };
 
   // Methods
-  public Cinema save(Cinema cinema) { 
-    if (cinema.getId() == 0) { 
-      cinema.setId(nextId.getAndIncrement()); 
-    } 
-    mapCinemas.put(cinema.getId(), cinema); return cinema; }
+  public Cinema save(Cinema cinema) {
+    if (cinema.getId() == 0) {
+      cinema.setId(nextId.getAndIncrement());
+    }
+    mapCinemas.put(cinema.getId(), cinema);
+
+    return cinema;
+  }
 
   public List<Cinema> findAll() {
     return new ArrayList<>(mapCinemas.values());
@@ -43,17 +47,7 @@ public class CinemaRepository {
     return null;
   }
 
-  /*public boolean saveCinema(Cinema cinema) {
-    if (mapCinemas.containsKey(cinema.getId())) return false;
-
-    mapCinemas.put(cinema.getId(), cinema);
-    return true;
-  }*/
-
-  /*public boolean deleteCinema(Cinema cinema) {
-    return mapCinemas.remove(cinema.getId()) != null;
-  }*/
- public boolean deleteCinema(int id) {
+  public boolean deleteCinema(int id) {
     return mapCinemas.remove(id) != null;
   }
 }
