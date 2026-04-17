@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/css/auth.css">
+
+<div id="auth" class="auth active">
+  <div class="auth-panel">
+
+    <div class="auth-logo">
+      <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
+      <div class="logo-tagline">El cine es mejor en compañía</div>
+    </div>
+
+    <div id="auth-login" class="auth-form active">
+      <h2 class="auth-title">¡Bienvenido de vuelta!</h2>
+
+      <form method="post" action="/login">
+
+        <div class="field-group">
+          <label>Username</label>
+          <input type="text" name="username" placeholder="Nombre de usuario" required />
+        </div>
+
+        <div class="field-group">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="tu@email.com" autocomplete="off" required />
+        </div>
+
+        <div class="field-group">
+          <label>Contraseña</label>
+          <input type="password" name="password" placeholder="••••••••" required />
+        </div>
+
+        <button type="submit" class="btn-primary full">Entrar</button>
+
+      </form>
+
+      <p class="auth-switch">¿Sin cuenta? <a href="/register">Regístrate</a></p>
+    </div>
+
+  </div>
+</div>
