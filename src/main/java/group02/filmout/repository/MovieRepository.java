@@ -42,7 +42,11 @@ public class MovieRepository {
     return true;
   }*/
 
-  public boolean deleteMovie(Movie movie) {
+  /*public boolean deleteMovie(Movie movie) {
     return mapMovies.remove(movie.getId()) != null;
-  }
+  }*/
+ 
+ public boolean deleteMovie(int id) {
+    return mapMovies.remove(id) != null;
+ }
 }

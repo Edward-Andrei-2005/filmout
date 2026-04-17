@@ -51,7 +51,11 @@ public class UserRepository {
     return true;
   }*/
 
-  public boolean deleteUser(User user) {
+  /*public boolean deleteUser(User user) {
     return mapUsers.remove(user.getId()) != null;
+  }*/
+ 
+  public boolean deleteUser(int id) {
+    return mapUsers.remove(id) != null;
   }
 }

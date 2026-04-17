@@ -67,7 +67,10 @@ public class EventRepository {
     return true;
   }*/
 
-  public boolean deleteEvent(Event event) {
+  /*public boolean deleteEvent(Event event) {
     return mapEvents.remove(event.getId()) != null;
-  }
+  }*/
+ public boolean deleteEvent(int id) {
+    return mapEvents.remove(id) != null;
+ }
 }

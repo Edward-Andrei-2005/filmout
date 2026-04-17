@@ -66,7 +66,11 @@ public class ReviewRepository {
     return true;
   }*/
 
-  public boolean deleteReview(Review review) {
+  /*public boolean deleteReview(Review review) {
     return mapReviews.remove(review.getId()) != null;
+  }*/
+ 
+  public boolean deleteReview(int id) {
+    return mapReviews.remove(id) != null;
   }
 }

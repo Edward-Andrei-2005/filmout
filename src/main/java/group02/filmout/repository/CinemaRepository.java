@@ -50,7 +50,10 @@ public class CinemaRepository {
     return true;
   }*/
 
-  public boolean deleteCinema(Cinema cinema) {
+  /*public boolean deleteCinema(Cinema cinema) {
     return mapCinemas.remove(cinema.getId()) != null;
+  }*/
+ public boolean deleteCinema(int id) {
+    return mapCinemas.remove(id) != null;
   }
 }
