@@ -44,12 +44,12 @@ public class UserRepository {
     return null;
   }
 
-  public boolean saveUser(User user) {
+  /*public boolean saveUser(User user) {
     if (mapUsers.containsKey(user.getId())) return false;
 
     mapUsers.put(user.getId(), user);
     return true;
-  }
+  }*/
 
   public boolean deleteUser(User user) {
     return mapUsers.remove(user.getId()) != null;

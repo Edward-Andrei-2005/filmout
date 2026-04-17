@@ -59,12 +59,12 @@ public class ReviewRepository {
     return aux;
   }
 
-  public boolean saveReview(Review review) {
+  /*public boolean saveReview(Review review) {
     if (mapReviews.containsKey(review.getId())) return false;
 
     mapReviews.put(review.getId(), review);
     return true;
-  }
+  }*/
 
   public boolean deleteReview(Review review) {
     return mapReviews.remove(review.getId()) != null;

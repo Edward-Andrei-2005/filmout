@@ -60,12 +60,12 @@ public class EventRepository {
     return auxEvents;
   }
 
-  public boolean saveEvent(Event event) {
+  /*public boolean saveEvent(Event event) {
     if (mapEvents.containsKey(event.getId())) return false;
 
     mapEvents.put(event.getId(), event);
     return true;
-  }
+  }*/
 
   public boolean deleteEvent(Event event) {
     return mapEvents.remove(event.getId()) != null;

@@ -43,12 +43,12 @@ public class CinemaRepository {
     return null;
   }
 
-  public boolean saveCinema(Cinema cinema) {
+  /*public boolean saveCinema(Cinema cinema) {
     if (mapCinemas.containsKey(cinema.getId())) return false;
 
     mapCinemas.put(cinema.getId(), cinema);
     return true;
-  }
+  }*/
 
   public boolean deleteCinema(Cinema cinema) {
     return mapCinemas.remove(cinema.getId()) != null;
