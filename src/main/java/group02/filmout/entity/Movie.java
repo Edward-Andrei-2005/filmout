@@ -6,6 +6,7 @@ public class Movie {
   private String title, genre, description, cover;
 
   // Constructor
+  public Movie() {};
   public Movie(int id, int duration, int year, int grade, String title, String genre,
       String description, String cover) {
     this.id = id;

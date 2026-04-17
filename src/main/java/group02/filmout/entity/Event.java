@@ -14,6 +14,7 @@ public class Event {
     private boolean isFull;
 
     // Constructor
+    public Event() {};
     public Event(int id, int maxAttendees, User admin, Movie movie, LocalDateTime date, 
         String location, String description) {
         this.id = id;

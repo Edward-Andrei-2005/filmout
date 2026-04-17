@@ -6,6 +6,7 @@ public class Cinema {
   private String name, latitude, longitude;
 
   // Constructor
+  public Cinema() {};
   public Cinema(int id, String name, String latitude, String longitude) {
     this.id = id;
     this.name = name;

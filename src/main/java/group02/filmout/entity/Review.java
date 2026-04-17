@@ -8,6 +8,7 @@ public class Review {
   private float grade;
 
   // Constructor
+  public Review() {};
   public Review(int id, User user, Movie movie, float grade) {
     this.id = id;
     this.user = user;
