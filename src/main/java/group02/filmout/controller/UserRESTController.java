@@ -29,7 +29,7 @@ public class UserRESTController {
     // GET /api/users
     @GetMapping
     public List<User> getAll() {
-        return (List<User>) userService.findAll();
+        return userService.findAll();
     }
 
     // ─── READ (uno) ──────────────────────────────────────────────

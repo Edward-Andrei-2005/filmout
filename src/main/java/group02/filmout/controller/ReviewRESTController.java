@@ -29,7 +29,7 @@ public class ReviewRESTController {
     // GET /api/reviews
     @GetMapping
     public List<Review> getAll() {
-        return (List<Review>) reviewService.findAll();
+        return reviewService.findAll();
     }
 
     // ─── READ (uno) ──────────────────────────────────────────────

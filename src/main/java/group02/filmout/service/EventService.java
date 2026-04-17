@@ -10,7 +10,8 @@ import group02.filmout.repository.EventRepository;
 
 @Service
 public class EventService {
-    //Attributes
+
+    // Attributes
     @Autowired
     private EventRepository eventRepository;
 

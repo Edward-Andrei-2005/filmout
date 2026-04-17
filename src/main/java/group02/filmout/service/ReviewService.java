@@ -2,6 +2,7 @@ package group02.filmout.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import group02.filmout.entity.Review;
@@ -11,6 +12,7 @@ import group02.filmout.repository.ReviewRepository;
 public class ReviewService {
 
     // Attributes
+    @Autowired
     private ReviewRepository reviewRepository;
 
     // CRUD

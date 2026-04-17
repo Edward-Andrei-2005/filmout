@@ -2,6 +2,7 @@ package group02.filmout.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import group02.filmout.entity.Movie;
@@ -11,6 +12,7 @@ import group02.filmout.repository.MovieRepository;
 public class MovieService {
 
     // Attributes
+    @Autowired
     private MovieRepository movieRepository;
 
     // CRUD
