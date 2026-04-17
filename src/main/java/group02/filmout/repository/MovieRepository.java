@@ -34,6 +34,27 @@ public class MovieRepository {
     return mapMovies.get(id);
   }
 
+  public Movie findByTitle(String title) {
+    for (Movie m : mapMovies.values()) {
+      if (m.getTitle().equalsIgnoreCase(title)) {
+        return m;
+      }
+    }
+    return null;
+  }
+
+  public List<Movie> findByGender(String gender) {
+    ArrayList<Movie> aux = new ArrayList<>();
+
+    for (Movie m : mapMovies.values()) {
+      if (m.getGender().equalsIgnoreCase(gender)) {
+        aux.add(m);
+      }
+    }
+
+    return aux;
+  }
+
   /*public boolean saveMovie(Movie movie) {
     if (mapMovies.containsKey(movie.getId()))
       return false;
@@ -45,7 +66,7 @@ public class MovieRepository {
   /*public boolean deleteMovie(Movie movie) {
     return mapMovies.remove(movie.getId()) != null;
   }*/
- 
+
  public boolean deleteMovie(int id) {
     return mapMovies.remove(id) != null;
  }
