@@ -3,6 +3,7 @@ package group02.filmout.repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.stereotype.Repository;
 
@@ -13,11 +14,18 @@ public class CinemaRepository {
 
   // Attributes
   private HashMap<Integer, Cinema> mapCinemas;
+  private AtomicInteger nextId = new AtomicInteger(1);
 
   // Constructor
   public CinemaRepository() {};
 
   // Methods
+  public Cinema save(Cinema cinema) { 
+    if (cinema.getId() == 0) { 
+      cinema.setId(nextId.getAndIncrement()); 
+    } 
+    mapCinemas.put(cinema.getId(), cinema); return cinema; }
+
   public List<Cinema> findAll() {
     return new ArrayList<>(mapCinemas.values());
   }

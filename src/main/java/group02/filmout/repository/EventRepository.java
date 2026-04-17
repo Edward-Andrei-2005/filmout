@@ -3,6 +3,7 @@ package group02.filmout.repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.stereotype.Repository;
 
@@ -14,11 +15,19 @@ import group02.filmout.entity.User;
 public class EventRepository {
   // Attributes
   private HashMap<Integer, Event> mapEvents;
+  private AtomicInteger nextId = new AtomicInteger(1);
   
   // Constructor
   public EventRepository() {}
 
   // Methods
+  public Event save(Event event) { 
+    if (event.getId() == 0) { 
+      event.setId(nextId.getAndIncrement()); 
+    } 
+    mapEvents.put(event.getId(), event); return event; 
+  }
+
   public List<Event> findAll() {
     return new ArrayList<>(mapEvents.values());
   }

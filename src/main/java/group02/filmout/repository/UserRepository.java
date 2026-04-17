@@ -1,6 +1,7 @@
 package group02.filmout.repository;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,11 +13,19 @@ import org.springframework.stereotype.Repository;
 public class UserRepository {
   // Attributes
   private HashMap<Integer, User> mapUsers;
+  private AtomicInteger nextId = new AtomicInteger(1);
   
   // Constructor
   public UserRepository() {}
 
   // Methods
+  public User save(User user) { 
+    if (user.getId() == 0) { 
+      user.setId(nextId.getAndIncrement()); 
+    } 
+    mapUsers.put(user.getId(), user); return user; 
+  }
+  
   public List<User> findAll() {
     return new ArrayList<>(mapUsers.values());
   }
