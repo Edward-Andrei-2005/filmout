@@ -125,11 +125,14 @@ public class ReviewRESTController {
     // ─── DELETE ──────────────────────────────────────────────────
     // DELETE /api/reviews/{id}
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable int id) {
-        boolean deleted = reviewService.deleteById(id);
-        if (!deleted) {
-            return ResponseEntity.notFound().build();    // 404
+    public ResponseEntity<Void> delete(@PathVariable int id, HttpSession session) {
+        User loggedUser = (User) session.getAttribute("loggedUser");
+        Review existing = reviewService.findById(id);
+        if (existing == null) return ResponseEntity.notFound().build();
+        if (loggedUser == null || existing.getUser().getId() != loggedUser.getId()) {
+            return ResponseEntity.status(403).build();
         }
+        reviewService.deleteById(id);
         return ResponseEntity.noContent().build();       // 204
     }
 }

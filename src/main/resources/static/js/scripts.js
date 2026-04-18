@@ -36,7 +36,7 @@ function renderReviews(list, reviews, movieId) {
           <span class="review-author">${escapeHtml(r.userName)}</span>
           <div class="review-header-right">
             <span class="review-stars">${starsHtml(r.grade)}</span>
-            ${isOwner ? `<button class="review-edit-btn" data-movie-id="${movieId}">✏️</button>` : ''}
+            ${isOwner ? `<button class="review-edit-btn" data-movie-id="${movieId}">✏️</button><button class="review-delete-btn" data-movie-id="${movieId}">🗑️</button>` : ''}
           </div>
         </div>
         ${r.comment ? `<p class="review-comment">${escapeHtml(r.comment)}</p>` : ''}
@@ -47,6 +47,18 @@ function renderReviews(list, reviews, movieId) {
     btn.addEventListener('click', () => {
       const item = btn.closest('.review-item');
       showEditForm(item, parseInt(btn.dataset.movieId));
+    });
+  });
+
+  list.querySelectorAll('.review-delete-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!confirm('Delete your review?')) return;
+      const item = btn.closest('.review-item');
+      const reviewId = parseInt(item.dataset.reviewId);
+      const movieId = parseInt(btn.dataset.movieId);
+      fetch('/api/reviews/' + reviewId, {method: 'DELETE'})
+        .then(r => { if (!r.ok) throw new Error(); loadReviews(movieId); })
+        .catch(() => alert('Error deleting review.'));
     });
   });
 }
