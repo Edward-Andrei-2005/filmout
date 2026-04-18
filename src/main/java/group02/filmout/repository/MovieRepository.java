@@ -45,11 +45,11 @@ public class MovieRepository {
     return null;
   }
 
-  public List<Movie> findByGender(String gender) {
+  public List<Movie> findByGenre(int genre) {
     ArrayList<Movie> aux = new ArrayList<>();
 
     for (Movie m : mapMovies.values()) {
-      if (m.getGender().equalsIgnoreCase(gender)) {
+      if (m.getGenre_ids().contains(genre)) {
         aux.add(m);
       }
     }
