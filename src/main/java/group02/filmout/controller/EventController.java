@@ -45,7 +45,7 @@ public class EventController {
         return "Event/form";
     }
 
-    // FALTA POR AÑADIR ESTO EN EL FORMULARIO PARA QUE SE MUESTREN LAS CINES EN EL SELECT
+    // ESTO SE VA A AÑADIR DESDE EL INDEX.HTML
     @PostMapping("/events/new")
     public String newEventPost(@RequestParam String movie, @RequestParam String description, @RequestParam String date, @RequestParam int maxAttendees, @RequestParam String location, HttpSession session, Model model) {
         User loggedUser = (User) session.getAttribute("loggedUser");
