@@ -60,9 +60,7 @@ public class AuthController {
             return "register";
         }
 
-        String hashedPassword = passwordEncoder.encode(password);
-
-        userService.save(new User(username, hashedPassword, email));
+        userService.save(new User(username, password, email));
         return "redirect:/login?registered";
     }
 

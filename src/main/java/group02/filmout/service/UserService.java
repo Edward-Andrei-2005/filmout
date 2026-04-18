@@ -3,6 +3,7 @@ package group02.filmout.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import group02.filmout.entity.User;
@@ -14,10 +15,14 @@ public class UserService {
     // Attributes
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     // CRUD
     public User save(User user) {
-        return userRepository.save(user);
+      user.setPassword(passwordEncoder.encode(user.getPassword()));
+      
+      return userRepository.save(user);
     }
 
     public List<User> findAll() {
