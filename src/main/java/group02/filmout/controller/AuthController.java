@@ -1,6 +1,7 @@
 package group02.filmout.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,8 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String registered, Model model) {
@@ -28,7 +31,8 @@ public class AuthController {
     @PostMapping("/login")
     public String loginPost(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         User user = userService.findByUserName(username);
-        if (user == null || !user.getPassword().equals(password)) {
+        
+        if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
             model.addAttribute("error", "Incorrect username or password.");
             return "login";
         }
@@ -55,7 +59,10 @@ public class AuthController {
             model.addAttribute("error", "Email already registered.");
             return "register";
         }
-        userService.save(new User(username, password, email));
+
+        String hashedPassword = passwordEncoder.encode(password);
+
+        userService.save(new User(username, hashedPassword, email));
         return "redirect:/login?registered";
     }
 
