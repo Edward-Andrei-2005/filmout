@@ -38,10 +38,14 @@
     </ul>
 
     <div class="nav-actions">
-      <button class="btn-icon">🔍</button>
+      {{#loggedUser}}
+      <span class="nav-username">👤 {{userName}}</span>
+      <a href="/logout" class="nav-link">Cerrar sesión</a>
+      {{/loggedUser}}
+      {{^loggedUser}}
       <a href="/login" class="nav-link">Iniciar sesión</a>
       <a href="/register" class="nav-link">Registrarse</a>
-      <a href="/logout" class="nav-link">Cerrar sesión</a>
+      {{/loggedUser}}
     </div>
   </nav>
 </body>
