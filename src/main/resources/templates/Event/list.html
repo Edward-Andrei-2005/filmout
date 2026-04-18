@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Events - Filmout</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body class="page">
+  <nav class="navbar">
+    <div class="nav-logo">
+      <a href="/home" style="text-decoration:none;">
+        <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="/home" class="nav-link">🏠<span>Home</span></a></li>
+      <li><a href="/movies" class="nav-link">🎬<span>Movies</span></a></li>
+      <li><a href="/events" class="nav-link active">👥<span>Events</span></a></li>
+      <li><a href="/history" class="nav-link">🕒<span>History</span></a></li>
+    </ul>
+    <div class="nav-actions">
+      {{#loggedUser}}
+      <a href="/profile" class="nav-username">👤 {{userName}}</a>
+      <a href="/logout" class="nav-link">Log out</a>
+      {{/loggedUser}}
+      {{^loggedUser}}
+      <a href="/login" class="nav-link">Log in</a>
+      <a href="/register" class="nav-link">Sign up</a>
+      {{/loggedUser}}
+    </div>
+  </nav>
+
+  <main class="events-page">
+
+    <div class="events-header">
+      <h1 class="events-title">Events</h1>
+      <a href="/events/new" class="btn-primary events-btn-new">+ New event</a>
+    </div>
+
+    <div class="events-grid">
+
+      <section class="events-section">
+        <h2 class="section-title">Available events</h2>
+        <div class="events-list empty-state">
+          <p>No events available yet.</p>
+        </div>
+      </section>
+
+      <section class="events-section">
+        <h2 class="section-title">My events</h2>
+        <div class="events-list empty-state">
+          <p>You haven't joined any events yet.</p>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+</body>
+
+</html>
