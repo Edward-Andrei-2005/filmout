@@ -36,14 +36,14 @@ public class UserController {
 
         User byUsername = userService.findByUserName(username);
         if (byUsername != null && byUsername.getId() != loggedUser.getId()) {
-            model.addAttribute("error", "El nombre de usuario ya está en uso.");
+            model.addAttribute("error", "Username already taken.");
             model.addAttribute("loggedUser", loggedUser);
             return "User/form";
         }
 
         User byEmail = userService.findByEmail(email);
         if (byEmail != null && byEmail.getId() != loggedUser.getId()) {
-            model.addAttribute("error", "El email ya está registrado.");
+            model.addAttribute("error", "Email already registered.");
             model.addAttribute("loggedUser", loggedUser);
             return "User/form";
         }
@@ -58,7 +58,7 @@ public class UserController {
         User saved = userService.patch(loggedUser.getId(), partial);
         session.setAttribute("loggedUser", saved);
         model.addAttribute("loggedUser", saved);
-        model.addAttribute("success", "Perfil actualizado correctamente.");
+        model.addAttribute("success", "Profile updated successfully.");
         return "User/form";
     }
 }

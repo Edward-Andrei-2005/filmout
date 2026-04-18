@@ -32,6 +32,10 @@ public class EventService {
         return eventRepository.deleteEvent(id);
     }
 
+    public List<Event> findByUser(group02.filmout.entity.User user) {
+        return eventRepository.findByUser(user);
+    }
+
     //PATCH
     public Event patch(int id, Event updatedFields) {
         Event existingEvent = eventRepository.findById(id);

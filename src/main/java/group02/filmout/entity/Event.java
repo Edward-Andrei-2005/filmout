@@ -78,6 +78,10 @@ public class Event {
     public void setListAttendees(ArrayList<User> listAttendees) {
         this.listAttendees = listAttendees;
     }
+    public int getAttendeeCount() {
+        return listAttendees == null ? 0 : listAttendees.size();
+    }
+
     public boolean isFull() {
         return isFull;
     }

@@ -20,7 +20,7 @@ public class AuthController {
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String registered, Model model) {
         if (registered != null) {
-            model.addAttribute("success", "¡Cuenta creada! Ya puedes iniciar sesión.");
+            model.addAttribute("success", "Account created! You can now log in.");
         }
         return "login";
     }
@@ -29,7 +29,7 @@ public class AuthController {
     public String loginPost(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         User user = userService.findByUserName(username);
         if (user == null || !user.getPassword().equals(password)) {
-            model.addAttribute("error", "Usuario o contraseña incorrectos.");
+            model.addAttribute("error", "Incorrect username or password.");
             return "login";
         }
         session.setAttribute("loggedUser", user);
@@ -44,15 +44,15 @@ public class AuthController {
     @PostMapping("/register")
     public String registerPost(@RequestParam String username, @RequestParam String email, @RequestParam String password, @RequestParam String confirmPassword, Model model) {
         if (!password.equals(confirmPassword)) {
-            model.addAttribute("error", "Las contraseñas no coinciden.");
+            model.addAttribute("error", "Passwords do not match.");
             return "register";
         }
         if (userService.findByUserName(username) != null) {
-            model.addAttribute("error", "El nombre de usuario ya está en uso.");
+            model.addAttribute("error", "Username already taken.");
             return "register";
         }
         if (userService.findByEmail(email) != null) {
-            model.addAttribute("error", "El email ya está registrado.");
+            model.addAttribute("error", "Email already registered.");
             return "register";
         }
         userService.save(new User(username, password, email));

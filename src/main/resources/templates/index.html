@@ -15,24 +15,13 @@
     <div class="nav-logo">
       <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
     </div>
-
     <ul class="nav-links">
-      <li>
-        <a href="/" class="nav-link active">
-          🏠<span>Home</span>
-        </a>
-      </li>
-
-      <li>
-        <a href="/events" class="nav-link">
-          👥<span>Events</span>
-        </a>
-      </li>
+      <li><a href="/" class="nav-link active">🏠<span>Home</span></a></li>
+      <li><a href="/events" class="nav-link">👥<span>Events</span></a></li>
     </ul>
-
     <div class="nav-actions">
       {{#loggedUser}}
-      <a href="/profile" class="nav-username">{{userName}}</a>
+      <a href="/profile" class="nav-username">👤 {{userName}}</a>
       <a href="/logout" class="nav-link">Logout</a>
       {{/loggedUser}}
       {{^loggedUser}}
@@ -41,6 +30,61 @@
       {{/loggedUser}}
     </div>
   </nav>
+
+  <main class="movies-page">
+    <h1 class="movies-title">Upcoming Movies</h1>
+
+    <div class="movies-grid">
+      {{#movies}}
+      <div class="movie-card" data-modal="{{id}}">
+        <div class="movie-card-poster">
+          <img src="https://image.tmdb.org/t/p/w342{{poster_path}}" alt="{{title}}" />
+        </div>
+        <div class="movie-card-info">
+          <p class="movie-card-title">{{title}}</p>
+          <p class="movie-card-year">{{year}}</p>
+        </div>
+      </div>
+      {{/movies}}
+    </div>
+  </main>
+
+  <!-- MODALS -->
+  {{#movies}}
+  <div id="modal-{{id}}" class="modal-overlay hidden" data-modal-id="{{id}}">
+    <div class="modal-box">
+
+      <div class="modal-backdrop">
+        <img src="https://image.tmdb.org/t/p/w1280{{backdrop_path}}" class="modal-backdrop-img" alt="" />
+        <button class="modal-close" data-close="{{id}}">✕</button>
+      </div>
+
+      <div class="modal-content">
+        <div class="modal-left">
+          <img class="modal-poster" src="https://image.tmdb.org/t/p/w342{{poster_path}}" alt="{{title}}" />
+        </div>
+        <div class="modal-right">
+          <h2 class="modal-title">{{title}}</h2>
+          <div class="modal-meta">
+            <span class="modal-rating">⭐ {{vote_average}}</span>
+            <span class="modal-year">{{year}}</span>
+          </div>
+          <p class="modal-overview">{{overview}}</p>
+          <div class="modal-genres">
+            {{#genre_names}}<span class="genre-tag">{{.}}</span>{{/genre_names}}
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <a href="/events/new?movieId={{id}}" class="btn-primary modal-btn">👥 Create Event</a>
+      </div>
+
+    </div>
+  </div>
+  {{/movies}}
+
+  <script src="/js/scripts.js"></script>
 </body>
 
 </html>

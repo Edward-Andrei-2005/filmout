@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>New Event - Filmout</title>
+  <title>Edit Event - Filmout</title>
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +18,7 @@
         <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
       </div>
 
+      {{#event}}
       {{#movie}}
       <div class="movie-selected movie-selected-header">
         <img src="https://image.tmdb.org/t/p/w92{{poster_path}}" alt="{{title}}" class="movie-selected-poster" />
@@ -28,48 +29,44 @@
       </div>
       {{/movie}}
 
-      <h2 class="auth-title">New Event</h2>
+      <h2 class="auth-title">Edit Event</h2>
 
       {{#error}}
       <div class="auth-message auth-error">{{error}}</div>
       {{/error}}
 
-      <form method="post" action="/events/new">
-
-        {{#movie}}
-        <input type="hidden" name="movieId" value="{{id}}" />
-        {{/movie}}
+      <form method="post" action="/events/{{id}}/edit">
 
         <div class="field-group">
           <label>Description</label>
-          <input type="text" name="description" placeholder="What's the plan?" required />
+          <input type="text" name="description" value="{{description}}" required />
         </div>
 
         <div class="field-group">
           <label>Date & time</label>
-          <input type="datetime-local" name="date" required />
+          <input type="datetime-local" name="date" value="{{date}}" required />
         </div>
 
         <div class="field-group">
           <label>Max attendees</label>
-          <input type="number" name="maxAttendees" min="2" max="50" placeholder="2" required />
+          <input type="number" name="maxAttendees" min="2" max="50" value="{{maxAttendees}}" required />
         </div>
 
         <div class="field-group">
           <label>Cinema</label>
           <select name="location" class="field-select" required>
-            <option value="" disabled selected>Select a cinema</option>
             {{#cinemas}}
-            <option value="{{name}}">{{name}}</option>
+            <option value="{{name}}" {{#selected}}selected{{/selected}}>{{name}}</option>
             {{/cinemas}}
           </select>
         </div>
 
-        <button type="submit" class="btn-primary full">Create event</button>
+        <button type="submit" class="btn-primary full">Save changes</button>
 
       </form>
+      {{/event}}
 
-      <a href="/" class="btn-primary btn-secondary full" style="display:block; text-align:center; text-decoration:none; margin-top:12px;">Cancel</a>
+      <a href="/events" class="btn-primary btn-secondary full" style="display:block; text-align:center; text-decoration:none; margin-top:12px;">Cancel</a>
 
     </div>
   </div>

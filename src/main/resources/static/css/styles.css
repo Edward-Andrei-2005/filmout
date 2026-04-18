@@ -251,6 +251,237 @@ body.page {
   min-height: 100vh;
 }
 
+/* ---------- MOVIES ---------- */
+.movies-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 24px 48px;
+}
+
+.movies-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.movie-card {
+  cursor: pointer;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(18, 18, 26, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.movie-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.movie-card-poster img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+}
+
+.movie-card-info {
+  padding: 10px 12px;
+}
+
+.movie-card-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-card-year {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* ---------- MODAL ---------- */
+.hidden {
+  display: none !important;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modal-box {
+  background: #12121a;
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.8);
+}
+
+.modal-backdrop {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background-color: #1a1a28;
+}
+
+.modal-backdrop-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.modal-close:hover {
+  background: rgba(255, 107, 53, 0.8);
+}
+
+.modal-content {
+  display: flex;
+  gap: 24px;
+  padding: 24px 28px 0;
+}
+
+.modal-poster {
+  width: 120px;
+  min-width: 120px;
+  border-radius: 12px;
+  margin-top: -60px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  border: 3px solid #12121a;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.modal-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.modal-rating {
+  color: #ffd166;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.modal-year {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.modal-overview {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.modal-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.genre-tag {
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  padding: 24px 28px;
+}
+
+.modal-btn {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px;
+  font-size: 0.9rem;
+}
+
+/* ---------- EVENT FORM MOVIE PREVIEW ---------- */
+.movie-selected {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 107, 53, 0.4);
+  background: rgba(255, 107, 53, 0.08);
+}
+
+.movie-selected-poster {
+  width: 42px;
+  border-radius: 6px;
+}
+
+.movie-selected-header {
+  margin-bottom: 20px;
+}
+
+.movie-selected-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.movie-selected-year {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
 /* ---------- EVENTS ---------- */
 .events-page {
   max-width: 1100px;
@@ -301,6 +532,77 @@ body.page {
   margin-bottom: 20px;
 }
 
+.event-card-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.event-card-poster {
+  width: 54px;
+  min-width: 54px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.event-card-body {
+  flex: 1;
+}
+
+.event-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.event-movie {
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.event-location, .event-date {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.event-desc {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  margin-top: 8px;
+}
+
+.event-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-open {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+}
+
+.badge-joined {
+  background: rgba(40, 167, 69, 0.15);
+  color: #6bcf7f;
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.badge-admin {
+  background: rgba(255, 107, 53, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+}
+
 .empty-state {
   color: var(--text-secondary);
   font-size: 0.9rem;
@@ -336,6 +638,17 @@ body.page {
   font-size: 0.7rem;
   text-transform: none;
   letter-spacing: 0;
+}
+
+.btn-danger {
+  background: rgba(220, 53, 69, 0.15);
+  border: 1px solid rgba(220, 53, 69, 0.4);
+  color: #ff6b6b;
+}
+
+.btn-danger:hover {
+  background: rgba(220, 53, 69, 0.3);
+  box-shadow: none;
 }
 
 .btn-secondary {

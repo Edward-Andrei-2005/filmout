@@ -13,25 +13,17 @@
 <body class="page">
   <nav class="navbar">
     <div class="nav-logo">
-      <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
+      <a href="/home" style="text-decoration:none;">
+        <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
+      </a>
     </div>
-
     <ul class="nav-links">
-      <li>
-        <a href="/" class="nav-link">
-          🏠<span>Home</span>
-        </a>
-      </li>
-      <li>
-        <a href="/events" class="nav-link active">
-          👥<span>Events</span>
-        </a>
-      </li>
+      <li><a href="/" class="nav-link">🏠<span>Home</span></a></li>
+      <li><a href="/events" class="nav-link active">👥<span>Events</span></a></li>
     </ul>
-
     <div class="nav-actions">
       {{#loggedUser}}
-      <a href="/profile" class="nav-username">{{userName}}</a>
+      <a href="/profile" class="nav-username">👤 {{userName}}</a>
       <a href="/logout" class="nav-link">Logout</a>
       {{/loggedUser}}
       {{^loggedUser}}
@@ -42,30 +34,67 @@
   </nav>
 
   <main class="events-page">
-
-    <div class="events-header">
-      <h1 class="events-title">Events</h1>
-      <a href="/events/new" class="btn-primary events-btn-new">+ New event</a>
-    </div>
+    <h1 class="events-title">Events</h1>
 
     <div class="events-grid">
 
       <section class="events-section">
-        <h2 class="section-title">Available events</h2>
-        <div class="events-list empty-state">
-          <p>No events available yet.</p>
-        </div>
+        <h2 class="section-title">Open events</h2>
+        {{#openEvents}}
+        <a href="/events/{{id}}" class="event-card event-card-link">
+          {{#movie}}
+          <img src="https://image.tmdb.org/t/p/w92{{poster_path}}" class="event-card-poster" alt="{{title}}" />
+          {{/movie}}
+          <div class="event-card-body">
+            {{#movie}}<p class="event-movie">🎬 {{title}}</p>{{/movie}}
+            <p class="event-location">📍 {{location}}</p>
+            <p class="event-date">🕒 {{date}}</p>
+            <p class="event-desc">{{description}}</p>
+            <span class="event-badge badge-open">👥 {{attendeeCount}}/{{maxAttendees}}</span>
+          </div>
+        </a>
+        {{/openEvents}}
+        {{^openEvents}}
+        <div class="empty-state"><p>No open events right now.</p></div>
+        {{/openEvents}}
       </section>
 
       <section class="events-section">
         <h2 class="section-title">My events</h2>
-        <div class="events-list empty-state">
-          <p>You haven't joined any events yet.</p>
-        </div>
+        {{#joinedEvents}}
+        <a href="/events/{{id}}" class="event-card event-card-link">
+          {{#movie}}
+          <img src="https://image.tmdb.org/t/p/w92{{poster_path}}" class="event-card-poster" alt="{{title}}" />
+          {{/movie}}
+          <div class="event-card-body">
+            {{#movie}}<p class="event-movie">🎬 {{title}}</p>{{/movie}}
+            <p class="event-location">📍 {{location}}</p>
+            <p class="event-date">🕒 {{date}}</p>
+            <p class="event-desc">{{description}}</p>
+            <span class="event-badge badge-joined">✅ Joined · {{attendeeCount}}/{{maxAttendees}}</span>
+          </div>
+        </a>
+        {{/joinedEvents}}
+        {{#myEvents}}
+        <a href="/events/{{id}}" class="event-card event-card-link">
+          {{#movie}}
+          <img src="https://image.tmdb.org/t/p/w92{{poster_path}}" class="event-card-poster" alt="{{title}}" />
+          {{/movie}}
+          <div class="event-card-body">
+            {{#movie}}<p class="event-movie">🎬 {{title}}</p>{{/movie}}
+            <p class="event-location">📍 {{location}}</p>
+            <p class="event-date">🕒 {{date}}</p>
+            <p class="event-desc">{{description}}</p>
+            <span class="event-badge badge-admin">⭐ Created · {{attendeeCount}}/{{maxAttendees}}</span>
+          </div>
+        </a>
+        {{/myEvents}}
+        {{^joinedEvents}}{{^myEvents}}
+        <div class="empty-state"><p>You haven't joined or created any events yet.</p></div>
+        {{/myEvents}}{{/joinedEvents}}
       </section>
 
     </div>
-
   </main>
 </body>
 

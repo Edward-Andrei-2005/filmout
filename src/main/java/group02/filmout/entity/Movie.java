@@ -156,6 +156,13 @@ public class Movie {
     this.id_hashmap = id_hashmap;
   }
 
+  public String getYear() {
+    if (release_date != null && release_date.length() >= 4) {
+      return release_date.substring(0, 4);
+    }
+    return "";
+  }
+
 
   /* 
   @Override
