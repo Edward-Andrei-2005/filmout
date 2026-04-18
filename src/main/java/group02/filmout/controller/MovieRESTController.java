@@ -25,6 +25,13 @@ public class MovieRESTController {
     @Autowired
     private MovieService movieService;
 
+    // ─── GET UPCOMING MOVIES ─────────────────────────────────────
+    // GET /api/movies/upcoming
+    @GetMapping("/upcoming")
+    public List<Movie> getUpcoming() {
+        return movieService.getUpcomingMovies();
+    }
+
     // ─── READ (todos) ────────────────────────────────────────────
     // GET /api/movies
     @GetMapping
@@ -64,6 +71,7 @@ public class MovieRESTController {
         return ResponseEntity.ok(saved);
     }
 
+    /*
     // ─── PATCH (actualizacion parcial) ───────────────────────────
     // PATCH /api/movies/{id}
     @PatchMapping("/{id}")
@@ -74,6 +82,7 @@ public class MovieRESTController {
         }
         return ResponseEntity.ok(updated);
     }
+    */
 
     // ─── DELETE ──────────────────────────────────────────────────
     // DELETE /api/movies/{id}
