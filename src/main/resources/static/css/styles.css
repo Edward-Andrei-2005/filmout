@@ -241,6 +241,25 @@ body {
   box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
 }
 
+.field-optional {
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-secondary);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+  box-shadow: none;
+}
+
 .profile-value {
   width: 100%;
   padding: 14px 16px;
