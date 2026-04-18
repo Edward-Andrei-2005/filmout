@@ -1,6 +1,5 @@
 package group02.filmout.service;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,23 +158,4 @@ public class MovieService {
     public boolean deleteById(int id) {
         return movieRepository.deleteMovie(id);
     }
-
-    //PATCH
-
-    // Shouldn't be PATCH methods in a entity wich calls an API
-    /*
-    public Movie patch(int id, Movie updatedFields) {
-        Movie existingMovie = movieRepository.findById(id);
-        if (existingMovie != null) {
-            if (updatedFields.getTitle() != null) existingMovie.setTitle(updatedFields.getTitle());
-            if (updatedFields.getGender() != null) existingMovie.setGender(updatedFields.getGender());
-            if (updatedFields.getDescription() != null) existingMovie.setDescription(updatedFields.getDescription());
-            if (updatedFields.getCover() != null) existingMovie.setCover(updatedFields.getCover());
-            if (updatedFields.getDuration() != 0) existingMovie.setDuration(updatedFields.getDuration());
-            if (updatedFields.getYear() != 0) existingMovie.setYear(updatedFields.getYear());
-            if (updatedFields.getGrade() != 0) existingMovie.setGrade(updatedFields.getGrade());
-        }
-        return movieRepository.save(existingMovie);
-    }
-    */
 }
