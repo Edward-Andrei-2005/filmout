@@ -40,6 +40,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 100;
 }
 
 /* LOGO */
@@ -400,6 +401,7 @@ body.page {
 
 .modal-meta {
   display: flex;
+  align-items: center;
   gap: 16px;
   margin-bottom: 12px;
 }

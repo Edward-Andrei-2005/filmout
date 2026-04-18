@@ -1,23 +1,21 @@
 package group02.filmout.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import group02.filmout.entity.Movie;
 import group02.filmout.repository.MovieRepository;
 import jakarta.annotation.PostConstruct;
 import tools.jackson.databind.JsonNode;
-
-import org.springframework.http.HttpHeaders;  
-import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 @Service
 public class MovieService {
@@ -52,7 +50,7 @@ public class MovieService {
         // We look for the "genres" list inside the JSON
         JsonNode results = root.get("genres");
 
-        // 4. Recorremos el array del JSON manualmente
+        // 4. Looping through the JSON array manually
         if (results != null && results.isArray()) {
             for (JsonNode genre : results) {
                 String name = genre.get("name").asString();
@@ -79,12 +77,12 @@ public class MovieService {
 
 
     public List<Movie> getUpcomingMovies() {
-        // 1. Configuración de la llamada (igual que antes)
+        // 1. Config the call (same as before)
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + API_KEY);
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        // 2. Pedimos la respuesta como un JsonNode (el árbol completo)
+        // 2. We ask for the response as a JsonNode (the whole tree)
         ResponseEntity<JsonNode> response = restTemplate.exchange(
             API_URL_UPCOMING_MOVIES,
             HttpMethod.GET,
@@ -95,17 +93,15 @@ public class MovieService {
         JsonNode root = response.getBody();
         List<Movie> listaPeliculas = new ArrayList<>();
 
-        // 3. Navegamos manualmente hasta la lista "results"
+        // 3. We navigate manually to the "results" list
         JsonNode results = root.get("results");
 
-        // 4. Recorremos el array del JSON manualmente
+        // 4. Looping through the JSON array manually
         if (results != null && results.isArray()) {
             for (JsonNode atribute : results) {
-                
-                // --- AQUÍ CREAS TU OBJETO Y MAPEAS CAMPO POR CAMPO ---
                 Movie m = new Movie();
                 
-                // Sacamos los datos del nodo y los asignamos
+                // We extract the data from the node and assign it
                 m.setAdult(atribute.get("adult").asBoolean());
                 m.setBackdrop_path(atribute.get("backdrop_path").asString());
 
@@ -127,7 +123,7 @@ public class MovieService {
                 m.setVote_average((float) atribute.get("vote_average").asDouble());
                 m.setVote_count(atribute.get("vote_count").asInt());
 
-                // Añadimos la película a nuestra lista
+                // We add the movie to our list
                 listaPeliculas.add(m);
             }
         }

@@ -123,7 +123,7 @@ public class EventController {
 
         boolean isAdmin = event.getAdmin().getId() == loggedUser.getId();
         boolean isJoined = event.getListAttendees() != null &&
-                           event.getListAttendees().stream().anyMatch(u -> u.getId() == loggedUser.getId());
+          event.getListAttendees().stream().anyMatch(u -> u.getId() == loggedUser.getId());
 
         model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("event", event);
@@ -192,12 +192,8 @@ public class EventController {
     }
 
     @PostMapping("/events/{id}/edit")
-    public String editEventPost(@PathVariable int id,
-                                @RequestParam String description,
-                                @RequestParam String date,
-                                @RequestParam int maxAttendees,
-                                @RequestParam String location,
-                                HttpSession session, Model model) {
+    public String editEventPost(@PathVariable int id, @RequestParam String description, @RequestParam String date,
+        @RequestParam int maxAttendees, @RequestParam String location, HttpSession session, Model model) {
         User loggedUser = (User) session.getAttribute("loggedUser");
         if (loggedUser == null) return "redirect:/login";
 
