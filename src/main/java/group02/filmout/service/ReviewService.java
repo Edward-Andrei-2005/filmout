@@ -28,6 +28,10 @@ public class ReviewService {
         return reviewRepository.findById(id);
     }
 
+    public List<Review> findByMovieApiId(int movieApiId) {
+        return reviewRepository.findByMovieApiId(movieApiId);
+    }
+
     public boolean deleteById(int id) {
         return reviewRepository.deleteReview(id);
     }
@@ -45,6 +49,9 @@ public class ReviewService {
             }
             if (updatedFields.getMovie() != null) {
                 existingReview.setMovie(updatedFields.getMovie());
+            }
+            if (updatedFields.getComment() != null) {
+                existingReview.setComment(updatedFields.getComment());
             }
         }
         return reviewRepository.save(existingReview);

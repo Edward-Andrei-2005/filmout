@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
-<body class="page">
+<body class="page" data-current-user="{{#loggedUser}}{{userName}}{{/loggedUser}}">
   <nav class="navbar">
     <div class="nav-logo">
       <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
@@ -78,6 +78,33 @@
 
       <div class="modal-actions">
         <a href="/events/new?movieId={{id}}" class="btn-primary modal-btn">👥 Create Event</a>
+      </div>
+
+      <div class="modal-reviews">
+        <h3 class="reviews-heading">Reviews</h3>
+        <div class="reviews-list" id="reviews-list-{{id}}">
+          <p class="reviews-empty">Loading reviews...</p>
+        </div>
+
+        {{#loggedUser}}
+        <div class="review-form">
+          <textarea class="review-textarea" placeholder="Share your thoughts about this movie..." maxlength="500"></textarea>
+          <div class="review-form-footer">
+            <div class="star-picker" data-selected="0">
+              <span class="star-label">Your rating:</span>
+              <span class="star" data-value="1">★</span>
+              <span class="star" data-value="2">★</span>
+              <span class="star" data-value="3">★</span>
+              <span class="star" data-value="4">★</span>
+              <span class="star" data-value="5">★</span>
+            </div>
+            <button class="btn-primary review-submit-btn">Submit review</button>
+          </div>
+        </div>
+        {{/loggedUser}}
+        {{^loggedUser}}
+        <p class="reviews-login-hint"><a href="/login">Log in</a> to write a review.</p>
+        {{/loggedUser}}
       </div>
 
     </div>

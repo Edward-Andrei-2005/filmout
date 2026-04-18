@@ -62,6 +62,14 @@ public class ReviewRepository {
     return aux;
   }
 
+  public List<Review> findByMovieApiId(int movieApiId) {
+    ArrayList<Review> result = new ArrayList<>();
+    for (Review r : mapReviews.values()) {
+      if (r.getMovieApiId() == movieApiId) result.add(r);
+    }
+    return result;
+  }
+
   public boolean deleteReview(int id) {
     return mapReviews.remove(id) != null;
   }

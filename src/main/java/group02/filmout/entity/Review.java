@@ -5,7 +5,9 @@ public class Review {
   private int id;
   private User user;
   private Movie movie;
+  private int movieApiId;
   private float grade;
+  private String comment;
 
   // Constructor
   public Review() {};
@@ -40,12 +42,28 @@ public class Review {
     this.movie = movie;
   }
 
+  public int getMovieApiId() {
+    return movieApiId;
+  }
+
+  public void setMovieApiId(int movieApiId) {
+    this.movieApiId = movieApiId;
+  }
+
   public float getGrade() {
     return grade;
   }
 
   public void setGrade(float grade) {
     this.grade = grade;
+  }
+
+  public String getComment() {
+    return comment;
+  }
+
+  public void setComment(String comment) {
+    this.comment = comment;
   }
 
   @Override
