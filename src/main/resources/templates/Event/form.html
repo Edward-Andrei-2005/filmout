@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>New Event - Filmout</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="auth" class="auth active">
+    <div class="auth-panel" style="max-width:500px;">
+
+      <div class="auth-logo">
+        <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
+      </div>
+
+      <h2 class="auth-title">New Event</h2>
+
+      {{#error}}
+      <div class="auth-message auth-error">{{error}}</div>
+      {{/error}}
+
+      <form method="post" action="/events/new">
+
+        <!-- FALTA POR AÑADIR ESTO EN EL CONTROLLER PARA QUE SE MUESTREN LAS CINES EN EL SELECT -->
+        <div class="field-group">
+          <label>Movie (SE SELECCIONARÁ AUTOMATICAMENTE LA PELI SELECCIONADA EN EL MAIN)</label>
+          <input type="text" name="movie" placeholder="Which movie?" required />
+        </div>
+
+        <div class="field-group">
+          <label>Description</label>
+          <input type="text" name="description" placeholder="What's the plan?" required />
+        </div>
+
+        <div class="field-group">
+          <label>Date & time</label>
+          <input type="datetime-local" name="date" required />
+        </div>
+
+        <div class="field-group">
+          <label>Max attendees</label>
+          <input type="number" name="maxAttendees" min="2" placeholder="2" required />
+        </div>
+
+        <div class="field-group">
+          <label>Cinema</label>
+          <select name="location" class="field-select" required>
+            <option value="" disabled selected>Select a cinema</option>
+            {{#cinemas}}
+            <option value="{{name}}">{{name}}</option>
+            {{/cinemas}}
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary full">Create event</button>
+
+      </form>
+
+      <a href="/events" class="btn-primary btn-secondary full" style="display:block; text-align:center; text-decoration:none; margin-top:12px;">Cancel</a>
+
+    </div>
+  </div>
+</body>
+
+</html>
