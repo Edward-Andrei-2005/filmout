@@ -17,18 +17,14 @@
         <div class="logo-tagline">El cine es mejor en compañía</div>
       </div>
 
-      <div id="auth-login" class="auth-form active">
-        <h2 class="auth-title">¡Bienvenido de vuelta!</h2>
-
-        {{#success}}
-        <div class="auth-message auth-success">{{success}}</div>
-        {{/success}}
+      <div id="auth-register" class="auth-form active">
+        <h2 class="auth-title">Crear cuenta</h2>
 
         {{#error}}
         <div class="auth-message auth-error">{{error}}</div>
         {{/error}}
 
-        <form method="post" action="/login">
+        <form method="post" action="/register">
 
           <div class="field-group">
             <label>Username</label>
@@ -36,15 +32,25 @@
           </div>
 
           <div class="field-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="tu@email.com" required />
+          </div>
+
+          <div class="field-group">
             <label>Contraseña</label>
             <input type="password" name="password" placeholder="••••••••" required />
           </div>
 
-          <button type="submit" class="btn-primary full">Entrar</button>
+          <div class="field-group">
+            <label>Confirmar contraseña</label>
+            <input type="password" name="confirmPassword" placeholder="••••••••" required />
+          </div>
+
+          <button type="submit" class="btn-primary full">Crear cuenta</button>
 
         </form>
 
-        <p class="auth-switch">¿Sin cuenta? <a href="/register">Regístrate</a></p>
+        <p class="auth-switch">¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
       </div>
 
     </div>

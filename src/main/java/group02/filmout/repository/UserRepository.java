@@ -46,6 +46,15 @@ public class UserRepository {
     return null;
   }
 
+  public User findByEmail(String email) {
+    for (User u : mapUsers.values()) {
+      if (u.getEmail() != null && u.getEmail().equalsIgnoreCase(email)) {
+        return u;
+      }
+    }
+    return null;
+  }
+
   public boolean deleteUser(int id) {
     return mapUsers.remove(id) != null;
   }

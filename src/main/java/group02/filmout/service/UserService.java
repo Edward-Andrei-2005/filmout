@@ -32,6 +32,14 @@ public class UserService {
         return userRepository.deleteUser(id);
     }
 
+    public User findByUserName(String userName) {
+        return userRepository.findByUserName(userName);
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     //PATCH
     public User patch(int id, User updatedFields) {
         User existingUser = userRepository.findById(id);
