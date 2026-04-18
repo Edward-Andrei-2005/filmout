@@ -1,4 +1,4 @@
-package group02.filmout.security;
+/*package group02.filmout.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,4 +26,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-}
+}*/
