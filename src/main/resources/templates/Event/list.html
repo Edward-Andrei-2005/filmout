@@ -11,26 +11,33 @@
 </head>
 
 <body class="page">
-  <nav class="navbar">
+ <nav class="navbar">
     <div class="nav-logo">
-      <a href="/home" style="text-decoration:none;">
-        <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
-      </a>
+      <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
     </div>
+
     <ul class="nav-links">
-      <li><a href="/home" class="nav-link">🏠<span>Home</span></a></li>
-      <li><a href="/movies" class="nav-link">🎬<span>Movies</span></a></li>
-      <li><a href="/events" class="nav-link active">👥<span>Events</span></a></li>
-      <li><a href="/history" class="nav-link">🕒<span>History</span></a></li>
+      <li>
+        <a href="/" class="nav-link">
+          🏠<span>Home</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/events" class="nav-link active">
+          👥<span>Events</span>
+        </a>
+      </li>
     </ul>
+
     <div class="nav-actions">
       {{#loggedUser}}
-      <a href="/profile" class="nav-username">👤 {{userName}}</a>
-      <a href="/logout" class="nav-link">Log out</a>
+      <a href="/profile" class="nav-username">{{userName}}</a>
+      <a href="/logout" class="nav-link">Logout</a>
       {{/loggedUser}}
       {{^loggedUser}}
-      <a href="/login" class="nav-link">Log in</a>
-      <a href="/register" class="nav-link">Sign up</a>
+      <a href="/login" class="nav-link">Login</a>
+      <a href="/register" class="nav-link">Register</a>
       {{/loggedUser}}
     </div>
   </nav>
