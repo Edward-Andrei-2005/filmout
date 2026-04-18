@@ -27,6 +27,15 @@ public class UserController {
         return "User/form";
     }
 
+    @PostMapping("/profile/delete")
+    public String deleteProfile(HttpSession session) {
+        User loggedUser = (User) session.getAttribute("loggedUser");
+        if (loggedUser == null) return "redirect:/login";
+        userService.deleteById(loggedUser.getId());
+        session.invalidate();
+        return "redirect:/login";
+    }
+
     @PostMapping("/profile")
     public String profilePost(@RequestParam String username, @RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
         User loggedUser = (User) session.getAttribute("loggedUser");

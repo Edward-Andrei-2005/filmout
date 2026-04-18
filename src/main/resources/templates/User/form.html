@@ -53,6 +53,12 @@
 
       <a href="/home" class="btn-primary btn-secondary full" style="display:block; text-align:center; text-decoration:none; margin-top:12px;">Back to Home</a>
 
+      {{#loggedUser}}
+      <form method="post" action="/profile/delete" style="margin-top:8px;">
+        <button type="submit" class="btn-primary btn-danger full">🗑️ Delete account</button>
+      </form>
+      {{/loggedUser}}
+
     </div>
   </div>
 </body>
