@@ -6,13 +6,13 @@ public class Movie {
   // Attributes
   private boolean adult, video;
   private String backdrop_path, original_language, original_title, overview, poster_path, release_date, title;
-  private ArrayList<Integer> genre_ids;
-  private int id, popularity, vote_count, id_hashmap;
+  private ArrayList<String> genre_names;
+  private int id_api, popularity, vote_count, id_hashmap;
   private float vote_average;
 
   // Constructor
   public Movie() {};
-  public Movie(boolean adult, String backdrop_path, ArrayList<Integer> genre_ids, int id,
+  public Movie(boolean adult, String backdrop_path, ArrayList<String> genre_names, int id_api,
                 String original_language, String original_title, String overview, 
                 int popularity, String poster_path, String release_date, String title,
                 boolean video, float vote_average, int vote_count, int id_hashmap
@@ -20,8 +20,8 @@ public class Movie {
     
       this.adult = adult;
       this.backdrop_path = backdrop_path;
-      this.genre_ids = new ArrayList<>(genre_ids);
-      this.id = id;
+      this.genre_names = new ArrayList<>(genre_names);
+      this.id_api = id_api;
       this.original_language = original_language;
       this.original_title = original_title;
       this.overview = overview;
@@ -44,12 +44,12 @@ public class Movie {
     return backdrop_path;
   }
 
-  public ArrayList<Integer> getGenre_ids() {
-    return new ArrayList<>(genre_ids);
+  public ArrayList<String> getGenre_names() {
+    return new ArrayList<>(genre_names);
   }
 
   public int getId() {
-    return id;
+    return id_api;
   }
 
   public String getOriginal_language() {
@@ -104,12 +104,12 @@ public class Movie {
     this.backdrop_path = backdrop_path;
   }
 
-  public void setGenre_ids(ArrayList<Integer> genre_ids) {
-    this.genre_ids = new ArrayList<>(genre_ids);
+  public void setGenre_names(ArrayList<String> genre_names) {
+    this.genre_names = new ArrayList<>(genre_names);
   }
 
-  public void setId(int id) {
-    this.id = id;
+  public void setId_api(int id_api) {
+    this.id_api = id_api;
   }
 
   public void setOriginal_language(String original_language) {
@@ -181,6 +181,6 @@ public class Movie {
       return false;
 
     Movie movie = (Movie) o;
-    return id == movie.id;
+    return id_api == movie.id_api;
   }
 }

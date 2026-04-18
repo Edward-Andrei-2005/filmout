@@ -21,10 +21,10 @@ public class MovieRepository {
 
   // Methods
   public Movie save(Movie movie) {
-    if (movie.getId() == 0) {
-      movie.setId(nextId.getAndIncrement());
+    if (movie.getId_hashmap() == 0) {
+      movie.setId_hashmap(nextId.getAndIncrement());
     }
-    mapMovies.put(movie.getId(), movie);
+    mapMovies.put(movie.getId_hashmap(), movie);
     return movie;
   }
 
@@ -45,11 +45,11 @@ public class MovieRepository {
     return null;
   }
 
-  public List<Movie> findByGenre(int genre) {
+  public List<Movie> findByGenre(String genre) {
     ArrayList<Movie> aux = new ArrayList<>();
 
     for (Movie m : mapMovies.values()) {
-      if (m.getGenre_ids().contains(genre)) {
+      if (m.getGenre_names().contains(genre)) {
         aux.add(m);
       }
     }

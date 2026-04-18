@@ -54,7 +54,7 @@ public class MovieRESTController {
     // POST /api/movies
     @PostMapping
     public ResponseEntity<Movie> create(@RequestBody Movie movie) {
-        movie.setId(0);
+        movie.setId_hashmap(0);
         Movie saved = movieService.save(movie);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);   // 201
     }
@@ -66,7 +66,7 @@ public class MovieRESTController {
         if (movieService.findById(id) == null) {
             return ResponseEntity.notFound().build();    // 404
         }
-        movie.setId(id);
+        movie.setId_hashmap(id);
         Movie saved = movieService.save(movie);
         return ResponseEntity.ok(saved);
     }
