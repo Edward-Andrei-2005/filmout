@@ -133,9 +133,13 @@ body {
 
 /* ---------- AUTH ---------- */
 .auth {
+  display: none;
   width: 100%;
-  display: flex;
   justify-content: center;
+}
+
+.auth.active {
+  display: flex;
 }
 
 .auth-panel {
@@ -235,6 +239,16 @@ body {
 .btn-primary:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+}
+
+.profile-value {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  font-size: 0.95rem;
 }
 
 .auth-switch {
