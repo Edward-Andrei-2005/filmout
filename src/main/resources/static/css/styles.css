@@ -259,6 +259,13 @@ body {
   font-weight: 600;
   font-size: 0.9rem;
   padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.nav-username:hover {
+  background: var(--bg-hover);
 }
 
 .auth-message {

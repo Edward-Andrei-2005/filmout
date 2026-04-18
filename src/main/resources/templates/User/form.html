@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mi perfil - Filmout</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="auth" class="auth active">
+    <div class="auth-panel">
+
+      <div class="auth-logo">
+        <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
+      </div>
+
+      {{#loggedUser}}
+      <h2 class="auth-title">Mi perfil</h2>
+
+      <div class="field-group">
+        <label>Username</label>
+        <p class="profile-value">{{userName}}</p>
+      </div>
+
+      <div class="field-group">
+        <label>Email</label>
+        <p class="profile-value">{{email}}</p>
+      </div>
+      {{/loggedUser}}
+
+      <a href="/home" class="btn-primary full" style="display:block; text-align:center; text-decoration:none; margin-top:24px;">Volver al inicio</a>
+
+    </div>
+  </div>
+</body>
+
+</html>

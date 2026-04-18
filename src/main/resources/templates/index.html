@@ -39,7 +39,7 @@
 
     <div class="nav-actions">
       {{#loggedUser}}
-      <span class="nav-username">👤 {{userName}}</span>
+      <a href="/profile" class="nav-username">{{userName}}</a>
       <a href="/logout" class="nav-link">Cerrar sesión</a>
       {{/loggedUser}}
       {{^loggedUser}}
