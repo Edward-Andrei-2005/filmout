@@ -14,11 +14,11 @@
 
       <div class="auth-logo">
         <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
-        <div class="logo-tagline">El cine es mejor en compañía</div>
+        <div class="logo-tagline">The movie experience, better together</div>
       </div>
 
       <div id="auth-register" class="auth-form active">
-        <h2 class="auth-title">Crear cuenta</h2>
+        <h2 class="auth-title">Create Account</h2>
 
         {{#error}}
         <div class="auth-message auth-error">{{error}}</div>
@@ -28,29 +28,29 @@
 
           <div class="field-group">
             <label>Username</label>
-            <input type="text" name="username" placeholder="Nombre de usuario" required />
+            <input type="text" name="username" placeholder="Username" required />
           </div>
 
           <div class="field-group">
             <label>Email</label>
-            <input type="email" name="email" placeholder="tu@email.com" required />
+            <input type="email" name="email" placeholder="you@email.com" required />
           </div>
 
           <div class="field-group">
-            <label>Contraseña</label>
+            <label>Password</label>
             <input type="password" name="password" placeholder="••••••••" required />
           </div>
 
           <div class="field-group">
-            <label>Confirmar contraseña</label>
+            <label>Confirm Password</label>
             <input type="password" name="confirmPassword" placeholder="••••••••" required />
           </div>
 
-          <button type="submit" class="btn-primary full">Crear cuenta</button>
+          <button type="submit" class="btn-primary full">Create Account</button>
 
         </form>
 
-        <p class="auth-switch">¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
+        <p class="auth-switch">Already have an account? <a href="/login">Log in</a></p>
       </div>
 
     </div>
