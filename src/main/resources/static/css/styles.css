@@ -786,6 +786,12 @@ body.page {
   gap: 2px;
 }
 
+.review-stars-text {
+  font-size: 0.82rem;
+  color: #ffd166;
+  font-weight: 600;
+}
+
 .star-display {
   color: rgba(255, 255, 255, 0.2);
   font-size: 0.9rem;

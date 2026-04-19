@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
-<body class="page" data-current-user="{{#loggedUser}}{{userName}}{{/loggedUser}}">
+<body class="page">
   <nav class="navbar">
     <div class="nav-logo">
       <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
@@ -82,13 +82,55 @@
 
       <div class="modal-reviews">
         <h3 class="reviews-heading">Reviews</h3>
-        <div class="reviews-list" id="reviews-list-{{id}}">
-          <p class="reviews-empty">Loading reviews...</p>
+
+        <div class="reviews-list">
+          {{#reviews}}
+          <div class="review-item">
+            <div class="review-item-header">
+              <span class="review-author">{{userName}}</span>
+              <div class="review-header-right">
+                <span class="review-stars-text">{{grade}}/5 ★</span>
+                {{#isOwner}}
+                <button type="button" class="review-edit-btn review-edit-toggle">✏️</button>
+                <form method="post" action="/reviews/{{id}}/delete" style="display:inline">
+                  <input type="hidden" name="movieApiId" value="{{movieApiId}}" />
+                  <button type="submit" class="review-delete-btn">🗑️</button>
+                </form>
+                {{/isOwner}}
+              </div>
+            </div>
+            {{#hasComment}}<p class="review-comment">{{comment}}</p>{{/hasComment}}
+            {{#isOwner}}
+            <form method="post" action="/reviews/{{id}}/edit" class="review-edit-form hidden">
+              <input type="hidden" name="movieApiId" value="{{movieApiId}}" />
+              <input type="hidden" name="grade" value="{{grade}}" />
+              <div class="star-picker" data-selected="{{grade}}">
+                <span class="star-label">Rating:</span>
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+              </div>
+              <textarea name="comment" class="review-textarea review-edit-textarea">{{comment}}</textarea>
+              <div class="review-edit-actions">
+                <button type="button" class="btn-secondary review-cancel-edit">Cancel</button>
+                <button type="submit" class="btn-primary">Save</button>
+              </div>
+            </form>
+            {{/isOwner}}
+          </div>
+          {{/reviews}}
+          {{^reviews}}
+          <p class="reviews-empty">No reviews yet. Be the first!</p>
+          {{/reviews}}
         </div>
 
-        {{#loggedUser}}
-        <div class="review-form">
-          <textarea class="review-textarea" placeholder="Share your thoughts about this movie..." maxlength="500"></textarea>
+        <!-- New review form: movieId uses movies context, form hidden via inverted section on attribute -->
+        <form method="post" action="/reviews/new" class="review-form" {{^loggedUser}}style="display:none"{{/loggedUser}}>
+          <input type="hidden" name="movieApiId" value="{{id}}" />
+          <input type="hidden" name="grade" value="0" />
+          <textarea name="comment" class="review-textarea" placeholder="Share your thoughts..." maxlength="500"></textarea>
           <div class="review-form-footer">
             <div class="star-picker" data-selected="0">
               <span class="star-label">Your rating:</span>
@@ -98,10 +140,9 @@
               <span class="star" data-value="4">★</span>
               <span class="star" data-value="5">★</span>
             </div>
-            <button class="btn-primary review-submit-btn">Submit review</button>
+            <button type="submit" class="btn-primary review-submit-btn">Submit review</button>
           </div>
-        </div>
-        {{/loggedUser}}
+        </form>
         {{^loggedUser}}
         <p class="reviews-login-hint"><a href="/login">Log in</a> to write a review.</p>
         {{/loggedUser}}

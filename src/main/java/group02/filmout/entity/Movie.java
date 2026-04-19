@@ -1,6 +1,8 @@
 package group02.filmout.entity;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class Movie {
   // Attributes
@@ -9,6 +11,7 @@ public class Movie {
   private ArrayList<String> genre_names;
   private int id_api, popularity, vote_count, id_hashmap;
   private float vote_average;
+  private List<Map<String, Object>> reviews = new ArrayList<>();
 
   // Constructor
   public Movie() {};
@@ -155,6 +158,9 @@ public class Movie {
   public void setId_hashmap(int id_hashmap) {
     this.id_hashmap = id_hashmap;
   }
+
+  public List<Map<String, Object>> getReviews() { return reviews; }
+  public void setReviews(List<Map<String, Object>> reviews) { this.reviews = reviews; }
 
   public String getYear() {
     if (release_date != null && release_date.length() >= 4) {
