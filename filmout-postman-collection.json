@@ -1,0 +1,221 @@
+{
+  "info": {
+    "name": "Filmout API",
+    "_postman_id": "filmout-api-collection",
+    "description": "CRUD + PATCH para las entidades User, Event y Review",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "GET all users",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/users"
+          }
+        },
+        {
+          "name": "GET user by id",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/users/1"
+          }
+        },
+        {
+          "name": "POST create user",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/users",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"johndoe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"secret123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "PUT replace user",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/api/users/1",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"johndoe_updated\",\n  \"email\": \"john_updated@example.com\",\n  \"password\": \"newpassword\"\n}"
+            }
+          }
+        },
+        {
+          "name": "PATCH update user (partial)",
+          "request": {
+            "method": "PATCH",
+            "url": "{{base_url}}/api/users/1",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newemail@example.com\"\n}"
+            }
+          }
+        },
+        {
+          "name": "DELETE user",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/users/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "GET all events",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/events"
+          }
+        },
+        {
+          "name": "GET event by id",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/events/1"
+          }
+        },
+        {
+          "name": "POST create event",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/events",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"location\": \"Cines Callao, Madrid\",\n  \"date\": \"2025-06-15T20:00:00\",\n  \"maxAttendees\": 10,\n  \"description\": \"Vemos Inception juntos\"\n}"
+            }
+          }
+        },
+        {
+          "name": "PUT replace event",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/api/events/1",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"location\": \"Cinesa La Maquinista\",\n  \"date\": \"2025-07-01T19:30:00\",\n  \"maxAttendees\": 5,\n  \"description\": \"Evento actualizado\"\n}"
+            }
+          }
+        },
+        {
+          "name": "PATCH update event (partial)",
+          "request": {
+            "method": "PATCH",
+            "url": "{{base_url}}/api/events/1",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Descripcion actualizada\",\n  \"maxAttendees\": 20\n}"
+            }
+          }
+        },
+        {
+          "name": "DELETE event",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/events/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "GET all reviews",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/reviews"
+          }
+        },
+        {
+          "name": "GET review by id",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/reviews/1"
+          }
+        },
+        {
+          "name": "POST create review",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/reviews",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"movieApiId\": 950526,\n  \"grade\": 4.5,\n  \"comment\": \"Muy buena pelicula\"\n}"
+            }
+          }
+        },
+        {
+          "name": "PUT replace review",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/api/reviews/1",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"movieApiId\": 950526,\n  \"grade\": 3.0,\n  \"comment\": \"Comentario reemplazado\"\n}"
+            }
+          }
+        },
+        {
+          "name": "PATCH update review (partial)",
+          "request": {
+            "method": "PATCH",
+            "url": "{{base_url}}/api/reviews/1",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"grade\": 5.0,\n  \"comment\": \"Actualice mi opinion, es perfecta\"\n}"
+            }
+          }
+        },
+        {
+          "name": "DELETE review",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/reviews/1"
+          }
+        }
+      ]
+    }
+  ]
+}

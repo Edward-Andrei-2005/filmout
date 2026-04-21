@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -69,19 +70,6 @@ public class MovieRESTController {
         Movie saved = movieService.save(movie);
         return ResponseEntity.ok(saved);
     }
-
-    /*
-    // ─── PATCH (actualizacion parcial) ───────────────────────────
-    // PATCH /api/movies/{id}
-    @PatchMapping("/{id}")
-    public ResponseEntity<Movie> patch(@PathVariable int id, @RequestBody Movie partial) {
-        Movie updated = movieService.patch(id, partial);
-        if (updated == null) {
-            return ResponseEntity.notFound().build();    // 404
-        }
-        return ResponseEntity.ok(updated);
-    }
-    */
 
     // ─── DELETE ──────────────────────────────────────────────────
     // DELETE /api/movies/{id}
