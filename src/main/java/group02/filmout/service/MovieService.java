@@ -31,7 +31,6 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-    // Method will only be called once when the app is started
     @PostConstruct
     public void init_genres() {
         HttpHeaders headers = new HttpHeaders();
@@ -47,10 +46,8 @@ public class MovieService {
 
         JsonNode root = response.getBody();
 
-        // We look for the "genres" list inside the JSON
         JsonNode results = root.get("genres");
 
-        // 4. Looping through the JSON array manually
         if (results != null && results.isArray()) {
             for (JsonNode genre : results) {
                 String name = genre.get("name").asString();
@@ -68,7 +65,7 @@ public class MovieService {
                 return id;
             }
         }
-        return -1; // Genre not found
+        return -1;
     }
 
     public String idToGenre(int id) {
@@ -77,12 +74,10 @@ public class MovieService {
 
 
     public List<Movie> getUpcomingMovies() {
-        // 1. Config the call (same as before)
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + API_KEY);
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        // 2. We ask for the response as a JsonNode (the whole tree)
         ResponseEntity<JsonNode> response = restTemplate.exchange(
             API_URL_UPCOMING_MOVIES,
             HttpMethod.GET,
@@ -93,15 +88,12 @@ public class MovieService {
         JsonNode root = response.getBody();
         List<Movie> listaPeliculas = new ArrayList<>();
 
-        // 3. We navigate manually to the "results" list
         JsonNode results = root.get("results");
 
-        // 4. Looping through the JSON array manually
         if (results != null && results.isArray()) {
             for (JsonNode atribute : results) {
                 Movie m = new Movie();
                 
-                // We extract the data from the node and assign it
                 m.setAdult(atribute.get("adult").asBoolean());
                 m.setBackdrop_path(atribute.get("backdrop_path").asString());
 
@@ -123,7 +115,6 @@ public class MovieService {
                 m.setVote_average((float) atribute.get("vote_average").asDouble());
                 m.setVote_count(atribute.get("vote_count").asInt());
 
-                // We add the movie to our list
                 listaPeliculas.add(m);
             }
         }
