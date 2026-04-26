@@ -1,61 +1,16 @@
 package group02.filmout.repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import org.springframework.stereotype.Repository;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import group02.filmout.entity.User;
+import java.util.Optional;
 
-@Repository
-public class UserRepository {
-  // Attributes
-  private HashMap<Integer, User> mapUsers = new HashMap<>();
-  private AtomicInteger nextId = new AtomicInteger(1);
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-  // Constructor
-  public UserRepository() {
-  }
+    // Spring creará automáticamente el código para estas búsquedas
+    User findByUserName(String userName);
 
-  // Methods
-  public User save(User user) {
-    if (user.getId() == 0) {
-      user.setId(nextId.getAndIncrement());
-    }
-    mapUsers.put(user.getId(), user);
-    return user;
-  }
+    User findByEmail(String email);
 
-  public List<User> findAll() {
-    return new ArrayList<>(mapUsers.values());
-  }
-
-  public User findById(int id) {
-    return mapUsers.get(id);
-  }
-
-  public User findByUserName(String userName) {
-    for (User u : mapUsers.values()) {
-      if (u.getUserName().equalsIgnoreCase(userName)) {
-        return u;
-      }
-    }
-
-    return null;
-  }
-
-  public User findByEmail(String email) {
-    for (User u : mapUsers.values()) {
-      if (u.getEmail() != null && u.getEmail().equalsIgnoreCase(email)) {
-        return u;
-      }
-    }
-    return null;
-  }
-
-  public boolean deleteUser(int id) {
-    return mapUsers.remove(id) != null;
-  }
+    // Nota: findAll(), save(), deleteById() y findById()
+    // ya vienen incluidos en JpaRepository.
 }

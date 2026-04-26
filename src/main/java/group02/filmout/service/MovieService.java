@@ -21,7 +21,7 @@ import tools.jackson.databind.JsonNode;
 public class MovieService {
 
     // Attributes
-    static final private String API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4OGQyMDRhNTA0M2RiYzI0NTVjMjY4NWE4ZjIyMmFiYiIsIm5iZiI6MTc3NjQzOTMxMy4yMjgsInN1YiI6IjY5ZTI1MDExYWRkNzhjZmZkMThiN2NmMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1sr147KxxgF3gS8zMUtmtvsKrbFXAxtM2NpFaamolWA"; 
+    static final private String API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4OGQyMDRhNTA0M2RiYzI0NTVjMjY4NWE4ZjIyMmFiYiIsIm5iZiI6MTc3NjQzOTMxMy4yMjgsInN1YiI6IjY5ZTI1MDExYWRkNzhjZmZkMThiN2NmMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1sr147KxxgF3gS8zMUtmtvsKrbFXAxtM2NpFaamolWA";
     static final private String API_URL_UPCOMING_MOVIES = "https://api.themoviedb.org/3/movie/upcoming";
     static final private String API_URL_GENRE_LIST = "https://api.themoviedb.org/3/genre/movie/list";
     static final private String API_URL_IMAGES = "https://image.tmdb.org/t/p/original";
@@ -38,10 +38,10 @@ public class MovieService {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         ResponseEntity<JsonNode> response = restTemplate.exchange(
-            API_URL_GENRE_LIST,
-            HttpMethod.GET,
-            entity,
-            JsonNode.class
+                API_URL_GENRE_LIST,
+                HttpMethod.GET,
+                entity,
+                JsonNode.class
         );
 
         JsonNode root = response.getBody();
@@ -52,7 +52,7 @@ public class MovieService {
             for (JsonNode genre : results) {
                 String name = genre.get("name").asString();
                 int id = genre.get("id").asInt();
-                
+
                 mapGenres.put(id, name);
             }
         }
@@ -79,10 +79,10 @@ public class MovieService {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         ResponseEntity<JsonNode> response = restTemplate.exchange(
-            API_URL_UPCOMING_MOVIES,
-            HttpMethod.GET,
-            entity,
-            JsonNode.class
+                API_URL_UPCOMING_MOVIES,
+                HttpMethod.GET,
+                entity,
+                JsonNode.class
         );
 
         JsonNode root = response.getBody();
@@ -93,7 +93,7 @@ public class MovieService {
         if (results != null && results.isArray()) {
             for (JsonNode atribute : results) {
                 Movie m = new Movie();
-                
+
                 m.setAdult(atribute.get("adult").asBoolean());
                 m.setBackdrop_path(atribute.get("backdrop_path").asString());
 

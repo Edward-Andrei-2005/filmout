@@ -1,6 +1,7 @@
 package group02.filmout.service;
 
 import java.util.List;
+import java.util.Optional; // Importante añadir esto
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,17 +13,16 @@ import group02.filmout.repository.UserRepository;
 @Service
 public class UserService {
 
-    // Attributes
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    // CRUD
     public User save(User user) {
-      user.setPassword(passwordEncoder.encode(user.getPassword()));
-      
-      return userRepository.save(user);
+        // Solo encriptamos si la contraseña no está ya encriptada (opcional según vuestra lógica)
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
     public List<User> findAll() {
@@ -30,11 +30,18 @@ public class UserService {
     }
 
     public User findById(int id) {
-        return userRepository.findById(id);
+        // JpaRepository devuelve Optional. Con .orElse(null) hacemos que
+        // funcione igual que vuestro código antiguo.
+        return userRepository.findById(id).orElse(null);
     }
 
     public boolean deleteById(int id) {
-        return userRepository.deleteUser(id);
+        // En JPA se llama deleteById. Verificamos si existe antes de borrar.
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     public User findByUserName(String userName) {
@@ -45,9 +52,9 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    //PATCH
+    // PATCH mejorado para JPA
     public User patch(int id, User updatedFields) {
-        User existingUser = userRepository.findById(id);
+        User existingUser = findById(id); // Usamos nuestro método que ya tiene el orElse(null)
         if (existingUser != null) {
             if (updatedFields.getUserName() != null) {
                 existingUser.setUserName(updatedFields.getUserName());
@@ -55,10 +62,12 @@ public class UserService {
             if (updatedFields.getEmail() != null) {
                 existingUser.setEmail(updatedFields.getEmail());
             }
-            if (updatedFields.getPassword() != null) {
-                existingUser.setPassword(updatedFields.getPassword());
+            // Si cambian la password, hay que volver a encriptarla
+            if (updatedFields.getPassword() != null && !updatedFields.getPassword().isBlank()) {
+                existingUser.setPassword(passwordEncoder.encode(updatedFields.getPassword()));
             }
+            return userRepository.save(existingUser);
         }
-        return userRepository.save(existingUser);
+        return null;
     }
 }
