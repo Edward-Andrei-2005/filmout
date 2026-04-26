@@ -11,11 +11,9 @@ import group02.filmout.repository.ReviewRepository;
 @Service
 public class ReviewService {
 
-    // Attributes
     @Autowired
     private ReviewRepository reviewRepository;
 
-    // CRUD
     public Review save(Review review) {
         return reviewRepository.save(review);
     }
@@ -25,7 +23,7 @@ public class ReviewService {
     }
 
     public Review findById(int id) {
-        return reviewRepository.findById(id);
+        return reviewRepository.findById(id).orElse(null);
     }
 
     public List<Review> findByMovieApiId(int movieApiId) {
@@ -33,26 +31,27 @@ public class ReviewService {
     }
 
     public boolean deleteById(int id) {
-        return reviewRepository.deleteReview(id);
+        if (reviewRepository.existsById(id)) {
+            reviewRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
-    //PATCH
     public Review patch(int id, Review updatedFields) {
-        Review existingReview = reviewRepository.findById(id);
-        if (existingReview != null) {
-            if (updatedFields.getGrade() != 0) {
-                existingReview.setGrade(updatedFields.getGrade());
-            }
-            // En la Parte I, si se pasan objetos User o Movie nuevos, se actualizan las referencias
-            if (updatedFields.getUser() != null) {
-                existingReview.setUser(updatedFields.getUser());
-            }
-            if (updatedFields.getMovie() != null) {
-                existingReview.setMovie(updatedFields.getMovie());
-            }
-            if (updatedFields.getComment() != null) {
-                existingReview.setComment(updatedFields.getComment());
-            }
+        Review existingReview = findById(id);
+        if (existingReview == null) return null;
+        if (updatedFields.getGrade() != 0) {
+            existingReview.setGrade(updatedFields.getGrade());
+        }
+        if (updatedFields.getUser() != null) {
+            existingReview.setUser(updatedFields.getUser());
+        }
+        if (updatedFields.getMovie() != null) {
+            existingReview.setMovie(updatedFields.getMovie());
+        }
+        if (updatedFields.getComment() != null) {
+            existingReview.setComment(updatedFields.getComment());
         }
         return reviewRepository.save(existingReview);
     }

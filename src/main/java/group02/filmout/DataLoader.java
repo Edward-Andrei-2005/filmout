@@ -21,6 +21,7 @@ public class DataLoader {
 
     @PostConstruct
     public void load() throws Exception {
+        if (cinemaService.existsAny()) return;
         InputStream is = getClass().getResourceAsStream("/data/cinemas.json");
         List<Cinema> cinemas = new ObjectMapper().readValue(is, new TypeReference<List<Cinema>>() {});
         cinemas.forEach(cinemaService::save);

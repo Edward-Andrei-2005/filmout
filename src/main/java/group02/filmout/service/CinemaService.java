@@ -11,11 +11,9 @@ import group02.filmout.repository.CinemaRepository;
 @Service
 public class CinemaService {
 
-    // Attributes
     @Autowired
     private CinemaRepository cinemaRepository;
 
-    // CRUD
     public Cinema save(Cinema cinema) {
         return cinemaRepository.save(cinema);
     }
@@ -25,26 +23,32 @@ public class CinemaService {
     }
 
     public Cinema findById(int id) {
-        return cinemaRepository.findById(id);
+        return cinemaRepository.findById(id).orElse(null);
     }
 
     public boolean deleteById(int id) {
-        return cinemaRepository.deleteCinema(id);
+        if (cinemaRepository.existsById(id)) {
+            cinemaRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
-    //PATCH
+    public boolean existsAny() {
+        return cinemaRepository.count() > 0;
+    }
+
     public Cinema patch(int id, Cinema updatedFields) {
-        Cinema existingCinema = cinemaRepository.findById(id);
-        if (existingCinema != null) {
-            if (updatedFields.getName() != null) {
-                existingCinema.setName(updatedFields.getName());
-            }
-            if (updatedFields.getLatitude() != null) {
-                existingCinema.setLatitude(updatedFields.getLatitude());
-            }
-            if (updatedFields.getLongitude() != null) {
-                existingCinema.setLongitude(updatedFields.getLongitude());
-            }
+        Cinema existingCinema = findById(id);
+        if (existingCinema == null) return null;
+        if (updatedFields.getName() != null) {
+            existingCinema.setName(updatedFields.getName());
+        }
+        if (updatedFields.getLatitude() != null) {
+            existingCinema.setLatitude(updatedFields.getLatitude());
+        }
+        if (updatedFields.getLongitude() != null) {
+            existingCinema.setLongitude(updatedFields.getLongitude());
         }
         return cinemaRepository.save(existingCinema);
     }

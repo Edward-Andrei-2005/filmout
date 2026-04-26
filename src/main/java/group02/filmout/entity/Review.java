@@ -1,10 +1,29 @@
 package group02.filmout.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+@Entity
+@Table(name = "reviews")
 public class Review {
   // Attributes
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
+
+  @ManyToOne
+  @JoinColumn(name = "user_id")
   private User user;
+
+  @Transient
   private Movie movie;
+
   private int movieApiId;
   private float grade;
   private String comment;
@@ -71,7 +90,7 @@ public class Review {
     return "Review{" +
         "id=" + id +
         ", user=" + user +
-        ", movie=" + movie +
+        ", movieApiId=" + movieApiId +
         ", grade=" + grade +
         '}';
   }

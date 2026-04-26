@@ -2,31 +2,65 @@ package group02.filmout.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+@Entity
+@Table(name = "events")
 public class Event {
     // Attributes
-    private int id, maxAttendees;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private int maxAttendees;
+
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
     private User admin;
+
+    @Transient
     private Movie movie;
+
+    private int movieApiId;
+
     private LocalDateTime date;
     private String location, description;
-    private ArrayList<User> listAttendees;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "event_attendees",
+        joinColumns = @JoinColumn(name = "event_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> listAttendees = new ArrayList<>();
+
     private boolean isFull;
 
     // Constructor
     public Event() {};
-    public Event(int maxAttendees, User admin, Movie movie, LocalDateTime date, 
+    public Event(int maxAttendees, User admin, Movie movie, LocalDateTime date,
         String location, String description) {
         this.maxAttendees = maxAttendees;
         this.admin = admin;
         this.movie = movie;
+        this.movieApiId = movie != null ? movie.getId() : 0;
         this.date = date;
         this.location = location;
         this.description = description;
         this.listAttendees = new ArrayList<>();
-        this.isFull = false; // Min number of attendees must be 2
-
-        // Add the admin to the attendees list
+        this.isFull = false;
     }
 
     // Methods
@@ -53,6 +87,13 @@ public class Event {
     }
     public void setMovie(Movie movie) {
         this.movie = movie;
+        if (movie != null) this.movieApiId = movie.getId();
+    }
+    public int getMovieApiId() {
+        return movieApiId;
+    }
+    public void setMovieApiId(int movieApiId) {
+        this.movieApiId = movieApiId;
     }
     public LocalDateTime getDate() {
         return date;
@@ -72,10 +113,10 @@ public class Event {
     public void setDescription(String description) {
         this.description = description;
     }
-    public ArrayList<User> getListAttendees() {
+    public List<User> getListAttendees() {
         return listAttendees;
     }
-    public void setListAttendees(ArrayList<User> listAttendees) {
+    public void setListAttendees(List<User> listAttendees) {
         this.listAttendees = listAttendees;
     }
     public int getAttendeeCount() {
@@ -95,11 +136,10 @@ public class Event {
                 "id=" + id +
                 ", maxAttendees=" + maxAttendees +
                 ", admin=" + admin +
-                ", movie=" + movie +
+                ", movieApiId=" + movieApiId +
                 ", date=" + date +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
-                ", ListAttendees=" + listAttendees +
                 ", isFull=" + isFull +
                  '}';
     }

@@ -38,12 +38,14 @@ public class EventController {
     @GetMapping("/events")
     public String events(HttpSession session, Model model) {
         User loggedUser = (User) session.getAttribute("loggedUser");
+        List<Event> allEvents = eventService.findAll();
+        allEvents.forEach(this::loadMovie);
         if (loggedUser != null) {
             model.addAttribute("loggedUser", loggedUser);
             List<Event> myEvents = new ArrayList<>();
             List<Event> joinedEvents = new ArrayList<>();
             List<Event> openEvents = new ArrayList<>();
-            for (Event e : eventService.findAll()) {
+            for (Event e : allEvents) {
                 if (e.getAdmin().getId() == loggedUser.getId()) {
                     myEvents.add(e);
                 } else if (e.getListAttendees() != null &&
@@ -57,7 +59,7 @@ public class EventController {
             model.addAttribute("joinedEvents", joinedEvents);
             model.addAttribute("openEvents", openEvents);
         } else {
-            model.addAttribute("openEvents", eventService.findAll());
+            model.addAttribute("openEvents", allEvents);
         }
         return "Event/list";
     }
@@ -108,6 +110,7 @@ public class EventController {
         event.setListAttendees(attendees);
         event.setFull(attendees.size() >= maxAttendees);
         event.setMovie(movie);
+        event.setMovieApiId(movieId != null ? movieId : 0);
 
         eventService.save(event);
         return "redirect:/events";
@@ -120,6 +123,7 @@ public class EventController {
 
         Event event = eventService.findById(id);
         if (event == null) return "redirect:/events";
+        loadMovie(event);
 
         boolean isAdmin = event.getAdmin().getId() == loggedUser.getId();
         boolean isJoined = event.getListAttendees() != null &&
@@ -229,5 +233,11 @@ public class EventController {
         return movieService.getUpcomingMovies().stream()
             .filter(m -> m.getId() == apiId)
             .findFirst().orElse(null);
+    }
+
+    private void loadMovie(Event event) {
+        if (event.getMovieApiId() != 0) {
+            event.setMovie(findMovieByApiId(event.getMovieApiId()));
+        }
     }
 }
