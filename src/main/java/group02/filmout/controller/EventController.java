@@ -99,20 +99,9 @@ public class EventController {
             return "Event/form";
         }
 
-        Event event = new Event();
-        event.setAdmin(loggedUser);
-        event.setDescription(description);
-        event.setDate(LocalDateTime.parse(date));
-        event.setMaxAttendees(maxAttendees);
-        event.setLocation(location);
-        ArrayList<User> attendees = new ArrayList<>();
-        attendees.add(loggedUser);
-        event.setListAttendees(attendees);
-        event.setFull(attendees.size() >= maxAttendees);
-        event.setMovie(movie);
-        event.setMovieApiId(movieId != null ? movieId : 0);
-
-        eventService.save(event);
+        eventService.createEvent(
+            loggedUser.getId(), movie, movieId != null ? movieId : 0,
+            location, LocalDateTime.parse(date), description, maxAttendees);
         return "redirect:/events";
     }
 
@@ -155,15 +144,7 @@ public class EventController {
         User loggedUser = (User) session.getAttribute("loggedUser");
         if (loggedUser == null) return "redirect:/login";
 
-        Event event = eventService.findById(id);
-        if (event != null && !event.isFull() &&
-            event.getListAttendees().stream().noneMatch(u -> u.getId() == loggedUser.getId())) {
-            event.getListAttendees().add(loggedUser);
-            if (event.getListAttendees().size() >= event.getMaxAttendees()) {
-                event.setFull(true);
-            }
-            eventService.save(event);
-        }
+        eventService.addAttendee(id, loggedUser.getId());
         return "redirect:/events/" + id;
     }
 
@@ -172,12 +153,7 @@ public class EventController {
         User loggedUser = (User) session.getAttribute("loggedUser");
         if (loggedUser == null) return "redirect:/login";
 
-        Event event = eventService.findById(id);
-        if (event != null) {
-            event.getListAttendees().removeIf(u -> u.getId() == loggedUser.getId());
-            event.setFull(false);
-            eventService.save(event);
-        }
+        eventService.removeAttendee(id, loggedUser.getId());
         return "redirect:/events/" + id;
     }
 

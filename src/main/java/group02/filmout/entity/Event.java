@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -46,6 +47,7 @@ public class Event {
     )
     private List<User> listAttendees = new ArrayList<>();
 
+    @Column(name = "is_full")
     private boolean isFull;
 
     // Constructor
