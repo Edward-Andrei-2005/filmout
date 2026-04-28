@@ -1,7 +1,7 @@
 package group02.filmout.service;
 
 import java.util.List;
-import java.util.Optional; // Importante añadir esto
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,13 +30,10 @@ public class UserService {
     }
 
     public User findById(int id) {
-        // JpaRepository devuelve Optional. Con .orElse(null) hacemos que
-        // funcione igual que vuestro código antiguo.
         return userRepository.findById(id).orElse(null);
     }
 
     public boolean deleteById(int id) {
-        // En JPA se llama deleteById. Verificamos si existe antes de borrar.
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
             return true;
@@ -54,7 +51,7 @@ public class UserService {
 
     // PATCH mejorado para JPA
     public User patch(int id, User updatedFields) {
-        User existingUser = findById(id); // Usamos nuestro método que ya tiene el orElse(null)
+        User existingUser = findById(id); 
         if (existingUser != null) {
             if (updatedFields.getUserName() != null) {
                 existingUser.setUserName(updatedFields.getUserName());
@@ -62,7 +59,6 @@ public class UserService {
             if (updatedFields.getEmail() != null) {
                 existingUser.setEmail(updatedFields.getEmail());
             }
-            // Si cambian la password, hay que volver a encriptarla
             if (updatedFields.getPassword() != null && !updatedFields.getPassword().isBlank()) {
                 existingUser.setPassword(passwordEncoder.encode(updatedFields.getPassword()));
             }
