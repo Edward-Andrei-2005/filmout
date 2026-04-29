@@ -5,27 +5,46 @@
 \paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 USERS\
-- CREAR - INSERT INTO users (email, password, user_name) VALUES ('2@2.com', '2', '2');\
-- LEER TODO - SELECT * FROM users;\
-- LEER UNO - SELECT * FROM users WHERE id = 1;\
-- UPDATE - UPDATE users SET email = '3@2.com', password = '22'  WHERE id = 10;\
-- BORRAR - DELETE FROM users WHERE id = 10;\
+\f0\fs24 \cf0 -- USERS\
+-- CREAR \
+INSERT INTO users (email, password, user_name) VALUES ('2@2.com', '2', '2');\
+-- LEER TODO \
+SELECT * FROM users;\
+-- LEER UNO \
+SELECT * FROM users WHERE id = 1;\
+-- UPDATE \
+UPDATE users SET email = '3@2.com', password = '22'  WHERE id = 10;\
+-- BORRAR \
+DELETE FROM users WHERE id = 10;\
 \
-REVIEWS\
-- CREAR - INSERT INTO reviews (comment, grade, movie_api_id, user_id) VALUES ('Ta bien', 4.1, X, 10);\
-- LEER TODO - SELECT * FROM reviews;\
-- LEER UNO - SELECT * FROM reviews WHERE id = 10;\
-- UPDATE - UPDATE reviews SET comment = x, grade = x, movie_api_id = x, user_id = x WHERE id = 10;\
-- BORRAR - DELETE FROM reviews WHERE id = 10;\
+-- REVIEWS\
+-- CREAR \
+INSERT INTO reviews (comment, grade, movie_api_id, user_id) VALUES ('Ta bien', 4.1, X, 10);\
+-- LEER TODO \
+SELECT * FROM reviews;\
+-- LEER UNO \
+SELECT * FROM reviews WHERE id = 10;\
+-- UPDATE \
+UPDATE reviews SET comment = x, grade = x, movie_api_id = x, user_id = x WHERE id = 10;\
+-- BORRAR \
+DELETE FROM reviews WHERE id = 10;\
 \
-EVENTS\
-- CREAR - INSERT INTO events (date, description, is_full, location, max_attendees, movie_api_id, admin_id) VALUES ('2026-05-10 19:00:00.000000', 'Quedada para ver Fight Club', 0, 'Cine Gran Via', 10, 550, 1);\
-- LEER TODO - SELECT * FROM events;\
-- LEER UNO - SELECT * FROM events WHERE id = 10;\
-- UPDATE - UPDATE events SET description = ?, is_full = ?, location = ?, max_attendees = ? WHERE id = ?;\
-- BORRAR - DELETE FROM events WHERE id = 12;\
+-- EVENTS\
+-- CREAR \
+INSERT INTO events (date, description, is_full, location, max_attendees, movie_api_id, admin_id) VALUES ('2026-05-10 19:00:00.000000', 'Quedada para ver They will kill you', 0, 'Cine Gran Via', 10, 1292695, 1);\
+INSERT INTO events (date, description, is_full, location, max_attendees, movie_api_id, admin_id) VALUES ('2026-05-11 20:00:00.000000', 'Quedada para ver Whistle', 0, 'Cine Callao', 15, 1193501, 1);\
+INSERT INTO events (date, description, is_full, location, max_attendees, movie_api_id, admin_id) VALUES ('2026-05-12 21:00:00.000000', 'Quedada para ver Now you see me: Now you dont', 0, 'Kinepolis', 20, 425274, 1);\
+-- LEER TODO \
+SELECT * FROM events;\
+-- LEER UNO \
+SELECT * FROM events WHERE id = 10;\
+-- UPDATE \
+UPDATE events SET description = ?, is_full = ?, location = ?, max_attendees = ? WHERE id = ?;\
+-- BORRAR \
+DELETE FROM events WHERE id = 12;\
 \
-UNIRSE A UN EVENTO\
-- UNIRSE - INSERT INTO event_attendees (event_id, user_id) VALUES (1, 1);\
-- QUITARSE - DELETE FROM event_attendees WHERE event_id = 1 AND user_id = 1;}
+-- UNIRSE A UN EVENTO\
+-- UNIRSE \
+INSERT INTO event_attendees (event_id, user_id) VALUES (1, 1);\
+-- QUITARSE \
+DELETE FROM event_attendees WHERE event_id = 1 AND user_id = 1;}
