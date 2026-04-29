@@ -7,9 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "users") // Usamos "users" porque "user" es palabra reservada en algunos SQL
+@Table(name = "users") 
 public class User {
-
     // Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +18,6 @@ public class User {
     private String password;
     private String email;
 
-    // Constructor vacío (Obligatorio para JPA)
     public User() {}
 
     // Constructor para vuestro uso

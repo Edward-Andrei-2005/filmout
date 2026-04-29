@@ -6,11 +6,7 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    // Spring creará automáticamente el código para estas búsquedas
     User findByUserName(String userName);
 
     User findByEmail(String email);
-
-    // Nota: findAll(), save(), deleteById() y findById()
-    // ya vienen incluidos en JpaRepository.
 }
