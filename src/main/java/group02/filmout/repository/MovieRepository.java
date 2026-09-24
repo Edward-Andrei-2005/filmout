@@ -35,23 +35,6 @@ public class MovieRepository {
         return mapMovies.get(id);
     }
 
-    public Movie findByTitle(String title) {
-        return mapMovies.values().stream()
-                .filter(m -> m.getTitle().equalsIgnoreCase(title))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public List<Movie> findByGenre(String genre) {
-        List<Movie> aux = new ArrayList<>();
-        for (Movie m : mapMovies.values()) {
-            if (m.getGenreNames().contains(genre)) {
-                aux.add(m);
-            }
-        }
-        return aux;
-    }
-
     public boolean deleteMovie(int id) {
         return mapMovies.remove(id) != null;
     }
