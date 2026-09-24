@@ -2,18 +2,9 @@ package group02.filmout.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import group02.filmout.entity.Cinema;
 import group02.filmout.service.CinemaService;
@@ -22,17 +13,18 @@ import group02.filmout.service.CinemaService;
 @RequestMapping("/api/cinemas")
 public class CinemaRESTController {
 
-    @Autowired
-    private CinemaService cinemaService;
+    private final CinemaService cinemaService;
 
-    // ─── READ (todos) ────────────────────────────────────────────
+    public CinemaRESTController(CinemaService cinemaService) {
+        this.cinemaService = cinemaService;
+    }
+
     // GET /api/cinemas
     @GetMapping
     public List<Cinema> getAll() {
         return cinemaService.findAll();
     }
 
-    // ─── READ (uno) ──────────────────────────────────────────────
     // GET /api/cinemas/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Cinema> getOne(@PathVariable int id) {
@@ -43,7 +35,6 @@ public class CinemaRESTController {
         return ResponseEntity.ok(cinema);                // 200
     }
 
-    // ─── CREATE ──────────────────────────────────────────────────
     // POST /api/cinemas
     @PostMapping
     public ResponseEntity<Cinema> create(@RequestBody Cinema cinema) {
@@ -53,7 +44,6 @@ public class CinemaRESTController {
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);   // 201
     }
 
-    // ─── UPDATE (reemplazo completo) ─────────────────────────────
     // PUT /api/cinemas/{id}
     @PutMapping("/{id}")
     public ResponseEntity<Cinema> replace(@PathVariable int id, @RequestBody Cinema cinema) {
@@ -65,7 +55,6 @@ public class CinemaRESTController {
         return ResponseEntity.ok(saved);
     }
 
-    // ─── PATCH (actualizacion parcial) ───────────────────────────
     // PATCH /api/cinemas/{id}
     @PatchMapping("/{id}")
     public ResponseEntity<Cinema> patch(@PathVariable int id, @RequestBody Cinema partial) {
@@ -76,7 +65,6 @@ public class CinemaRESTController {
         return ResponseEntity.ok(updated);
     }
 
-    // ─── DELETE ──────────────────────────────────────────────────
     // DELETE /api/cinemas/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) {

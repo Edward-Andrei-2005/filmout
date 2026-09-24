@@ -1,7 +1,6 @@
 package group02.filmout.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +14,13 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class AuthController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthController(UserService userService, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String registered, Model model) {
@@ -31,7 +33,7 @@ public class AuthController {
     @PostMapping("/login")
     public String loginPost(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         User user = userService.findByUserName(username);
-        
+
         if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
             model.addAttribute("error", "Incorrect username or password.");
             return "login";
@@ -60,13 +62,19 @@ public class AuthController {
             return "register";
         }
 
-        userService.save(new User(username, password, email));
+        // El UserService.save() se encargará de encriptar la contraseña.
+        User newUser = new User();
+        newUser.setUserName(username);
+        newUser.setEmail(email);
+        newUser.setPassword(password);
+        userService.save(newUser);
+
         return "redirect:/login?registered";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/login";
+        return "redirect:/home";
     }
 }

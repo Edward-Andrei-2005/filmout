@@ -3,7 +3,6 @@ package group02.filmout;
 import java.io.InputStream;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -16,14 +15,21 @@ import jakarta.annotation.PostConstruct;
 @Component
 public class DataLoader {
 
-    @Autowired
-    private CinemaService cinemaService;
+    private final CinemaService cinemaService;
+
+    public DataLoader(CinemaService cinemaService) {
+        this.cinemaService = cinemaService;
+    }
 
     @PostConstruct
     public void load() throws Exception {
         if (cinemaService.existsAny()) return;
-        InputStream is = getClass().getResourceAsStream("/data/cinemas.json");
-        List<Cinema> cinemas = new ObjectMapper().readValue(is, new TypeReference<List<Cinema>>() {});
-        cinemas.forEach(cinemaService::save);
+
+        try (InputStream is = getClass().getResourceAsStream("/data/cinemas.json")) {
+            if (is != null) {
+                List<Cinema> cinemas = new ObjectMapper().readValue(is, new TypeReference<List<Cinema>>() {});
+                cinemas.forEach(cinemaService::save);
+            }
+        }
     }
 }

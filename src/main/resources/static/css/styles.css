@@ -29,7 +29,6 @@ body {
   justify-content: center;
 }
 
-/* NAVBAR */
 .navbar {
   height: 70px;
   display: flex;
@@ -43,7 +42,6 @@ body {
   z-index: 100;
 }
 
-/* LOGO */
 .nav-logo {
   font-size: 1.1rem;
   font-weight: bold;
@@ -58,7 +56,6 @@ body {
   color: var(--accent);
 }
 
-/* LINKS */
 .nav-links {
   display: flex;
   gap: 10px;
@@ -66,12 +63,10 @@ body {
   list-style: none;
 }
 
-/* LI */
 .nav-links li {
   display: flex;
 }
 
-/* a */
 .nav-link {
   display: flex;
   align-items: center;
@@ -83,26 +78,22 @@ body {
   transition: 0.2s;
 }
 
-/* HOVER */
 .nav-link:hover {
   background: var(--bg-hover);
   color: var(--text);
 }
 
-/* ACTIVE */
 .nav-link.active {
   background: var(--bg-hover);
   color: var(--accent);
 }
 
-/* ACTIONS */
 .nav-actions {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* ICON BUTTON */
 .btn-icon {
   width: 48px;
   height: 48px;
@@ -132,7 +123,6 @@ body {
   font-weight: bold;
 }
 
-/* ---------- AUTH ---------- */
 .auth {
   display: none;
   width: 100%;
@@ -242,7 +232,6 @@ body {
   box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
 }
 
-/* ---------- PAGES ---------- */
 body.page {
   display: block;
   background:
@@ -252,7 +241,6 @@ body.page {
   min-height: 100vh;
 }
 
-/* ---------- MOVIES ---------- */
 .movies-page {
   max-width: 1200px;
   margin: 0 auto;
@@ -312,7 +300,6 @@ body.page {
   color: var(--text-secondary);
 }
 
-/* ---------- MODAL ---------- */
 .hidden {
   display: none !important;
 }
@@ -452,7 +439,6 @@ body.page {
   font-size: 0.9rem;
 }
 
-/* ---------- EVENT FORM MOVIE PREVIEW ---------- */
 .movie-selected {
   display: flex;
   align-items: center;
@@ -484,7 +470,6 @@ body.page {
   color: var(--text-secondary);
 }
 
-/* ---------- EVENTS ---------- */
 .events-page {
   max-width: 1100px;
   margin: 0 auto;
@@ -726,7 +711,6 @@ body.page {
   color: #6bcf7f;
 }
 
-/* ---------- REVIEWS ---------- */
 .modal-reviews {
   padding: 0 28px 28px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -890,7 +874,6 @@ body.page {
   font-size: 0.85rem;
 }
 
-/* ---------- REVIEW EDIT ---------- */
 .review-header-right {
   display: flex;
   align-items: center;
@@ -965,4 +948,16 @@ body.page {
 .review-edit-actions .btn-primary {
   padding: 6px 14px;
   font-size: 0.82rem;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }

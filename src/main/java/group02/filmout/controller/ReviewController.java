@@ -1,6 +1,5 @@
 package group02.filmout.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +13,11 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class ReviewController {
 
-    @Autowired
-    private ReviewService reviewService;
+    private final ReviewService reviewService;
+
+    public ReviewController(ReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
 
     @PostMapping("/reviews/new")
     public String create(@RequestParam int movieApiId, @RequestParam float grade, @RequestParam(required = false, defaultValue = "") String comment,

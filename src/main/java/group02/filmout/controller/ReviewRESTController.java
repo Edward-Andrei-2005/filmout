@@ -5,18 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import group02.filmout.entity.Review;
 import group02.filmout.entity.User;
@@ -27,10 +18,12 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/api/reviews")
 public class ReviewRESTController {
 
-    @Autowired
-    private ReviewService reviewService;
+    private final ReviewService reviewService;
 
-    // ─── BY MOVIE ────────────────────────────────────────────────
+    public ReviewRESTController(ReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
+
     // GET /api/reviews/movie/{apiId}
     @GetMapping("/movie/{apiId}")
     public List<Map<String, Object>> getByMovie(@PathVariable int apiId) {
@@ -69,14 +62,12 @@ public class ReviewRESTController {
         return ResponseEntity.status(HttpStatus.CREATED).body(resp);
     }
 
-    // ─── READ (todos) ────────────────────────────────────────────
     // GET /api/reviews
     @GetMapping
     public List<Review> getAll() {
         return reviewService.findAll();
     }
 
-    // ─── READ (uno) ──────────────────────────────────────────────
     // GET /api/reviews/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Review> getOne(@PathVariable int id) {
@@ -87,7 +78,6 @@ public class ReviewRESTController {
         return ResponseEntity.ok(review);                // 200
     }
 
-    // ─── CREATE ──────────────────────────────────────────────────
     // POST /api/reviews
     @PostMapping
     public ResponseEntity<Review> create(@RequestBody Review review) {
@@ -96,7 +86,6 @@ public class ReviewRESTController {
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);   // 201
     }
 
-    // ─── UPDATE (reemplazo completo) ─────────────────────────────
     // PUT /api/reviews/{id}
     @PutMapping("/{id}")
     public ResponseEntity<Review> replace(@PathVariable int id, @RequestBody Review review) {
@@ -108,7 +97,6 @@ public class ReviewRESTController {
         return ResponseEntity.ok(saved);
     }
 
-    // ─── PATCH (actualizacion parcial) ───────────────────────────
     // PATCH /api/reviews/{id}
     @PatchMapping("/{id}")
     public ResponseEntity<?> patch(@PathVariable int id, @RequestBody Review partial, HttpSession session) {
@@ -122,7 +110,6 @@ public class ReviewRESTController {
         return ResponseEntity.ok(updated);
     }
 
-    // ─── DELETE ──────────────────────────────────────────────────
     // DELETE /api/reviews/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id, HttpSession session) {

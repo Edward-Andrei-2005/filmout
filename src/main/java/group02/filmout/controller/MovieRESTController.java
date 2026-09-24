@@ -2,7 +2,6 @@ package group02.filmout.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,63 +20,55 @@ import group02.filmout.service.MovieService;
 @RequestMapping("/api/movies")
 public class MovieRESTController {
 
-    @Autowired
-    private MovieService movieService;
+    private final MovieService movieService;
 
-    // ─── GET UPCOMING MOVIES ─────────────────────────────────────
-    // GET /api/movies/upcoming
+    // Inyección por constructor
+    public MovieRESTController(MovieService movieService) {
+        this.movieService = movieService;
+    }
+
     @GetMapping("/upcoming")
     public List<Movie> getUpcoming() {
         return movieService.getUpcomingMovies();
     }
 
-    // ─── READ (todos) ────────────────────────────────────────────
-    // GET /api/movies
     @GetMapping
     public List<Movie> getAll() {
         return movieService.findAll();
     }
 
-    // ─── READ (uno) ──────────────────────────────────────────────
-    // GET /api/movies/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Movie> getOne(@PathVariable int id) {
         Movie movie = movieService.findById(id);
         if (movie == null) {
-            return ResponseEntity.notFound().build();   // 404
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(movie);                // 200
+        return ResponseEntity.ok(movie);
     }
 
-    // ─── CREATE ──────────────────────────────────────────────────
-    // POST /api/movies
     @PostMapping
     public ResponseEntity<Movie> create(@RequestBody Movie movie) {
-        movie.setId_hashmap(0);
+        movie.setHashmapId(0);
         Movie saved = movieService.save(movie);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);   // 201
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
-    // ─── UPDATE (reemplazo completo) ─────────────────────────────
-    // PUT /api/movies/{id}
     @PutMapping("/{id}")
     public ResponseEntity<Movie> replace(@PathVariable int id, @RequestBody Movie movie) {
         if (movieService.findById(id) == null) {
-            return ResponseEntity.notFound().build();    // 404
+            return ResponseEntity.notFound().build();
         }
-        movie.setId_hashmap(id);
+        movie.setHashmapId(id);
         Movie saved = movieService.save(movie);
         return ResponseEntity.ok(saved);
     }
 
-    // ─── DELETE ──────────────────────────────────────────────────
-    // DELETE /api/movies/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) {
         boolean deleted = movieService.deleteById(id);
         if (!deleted) {
-            return ResponseEntity.notFound().build();    // 404
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.noContent().build();       // 204
+        return ResponseEntity.noContent().build();
     }
 }

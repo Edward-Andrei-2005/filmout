@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Event - Filmout</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div id="auth" class="auth active">
+    <div class="auth-panel" style="max-width:500px;">
+
+        <div class="auth-logo">
+            <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
+        </div>
+
+        {{#event}}
+        {{#movie}}
+        <div class="movie-selected movie-selected-header">
+            <img src="https://image.tmdb.org/t/p/w92{{posterPath}}" alt="{{title}}" class="movie-selected-poster" />
+            <div>
+                <span class="movie-selected-title">{{title}}</span>
+                <span class="movie-selected-year">{{year}}</span>
+            </div>
+        </div>
+        {{/movie}}
+
+        <h2 class="auth-title">Edit Event</h2>
+
+        {{#error}}
+        <div class="auth-message auth-error">{{error}}</div>
+        {{/error}}
+
+        <form method="post" action="/events/{{id}}/edit">
+
+            <div class="field-group">
+                <label for="edit-description">Description</label>
+                <input type="text" id="edit-description" name="description" value="{{description}}" required />
+            </div>
+
+            <div class="field-group">
+                <label for="edit-date">Date & time</label>
+                <input type="datetime-local" id="edit-date" name="date" value="{{date}}" required />
+            </div>
+
+            <div class="field-group">
+                <label for="edit-maxAttendees">Max attendees</label>
+                <input type="number" id="edit-maxAttendees" name="maxAttendees" min="2" max="50" value="{{maxAttendees}}" required />
+            </div>
+
+            <div class="field-group">
+                <label for="edit-location">Cinema</label>
+                <select id="edit-location" name="location" class="field-select" required>
+                    {{#cinemas}}
+                    {{#selected}}
+                    <option value="{{name}}" selected>{{name}}</option>
+                    {{/selected}}
+                    {{^selected}}
+                    <option value="{{name}}">{{name}}</option>
+                    {{/selected}}
+                    {{/cinemas}}
+                </select>
+            </div>
+
+            <button type="submit" class="btn-primary full">Save changes</button>
+
+        </form>
+        {{/event}}
+
+        <a href="/events" class="btn-primary btn-secondary full" style="display:block; text-align:center; text-decoration:none; margin-top:12px;">Cancel</a>
+
+    </div>
+</div>
+</body>
+
+</html>

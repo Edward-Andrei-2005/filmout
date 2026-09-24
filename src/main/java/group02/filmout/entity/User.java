@@ -7,9 +7,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "users") 
+@Table(name = "users")
 public class User {
-    // Attributes
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,14 +20,12 @@ public class User {
 
     public User() {}
 
-    // Constructor para vuestro uso
     public User(String userName, String password, String email) {
         this.userName = userName;
         this.password = password;
         this.email = email;
     }
 
-    // Getters y Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -42,7 +40,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", userName='" + userName + '\'' + '}';
+        // Mantenemos no imprimir el password, pero añadimos el email para más contexto en los logs.
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
     @Override
@@ -50,6 +53,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id;
+        return id != 0 && id == user.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

@@ -2,53 +2,54 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" href="/css/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Login - Filmout</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <div id="auth" class="auth active">
+<div id="auth" class="auth active">
     <div class="auth-panel">
 
-      <div class="auth-logo">
-        <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
-        <div class="logo-tagline">The movie experience, better together</div>
-      </div>
+        <div class="auth-logo">
+            <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
+            <div class="logo-tagline">The movie experience, better together</div>
+        </div>
 
-      <div id="auth-login" class="auth-form active">
-        <h2 class="auth-title">Welcome back!</h2>
+        <div id="auth-login" class="auth-form active">
+            <h2 class="auth-title">Welcome back!</h2>
 
-        {{#success}}
-        <div class="auth-message auth-success">{{success}}</div>
-        {{/success}}
+            {{#success}}
+            <div class="auth-message auth-success">{{success}}</div>
+            {{/success}}
 
-        {{#error}}
-        <div class="auth-message auth-error">{{error}}</div>
-        {{/error}}
+            {{#error}}
+            <div class="auth-message auth-error">{{error}}</div>
+            {{/error}}
 
-        <form method="post" action="/login">
+            <form method="post" action="/login">
 
-          <div class="field-group">
-            <label>Username</label>
-            <input type="text" name="username" placeholder="Username" required />
-          </div>
+                <div class="field-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Username" required />
+                </div>
+                <div class="field-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required />
+                </div>
 
-          <div class="field-group">
-            <label>Password</label>
-            <input type="password" name="password" placeholder="••••••••" required />
-          </div>
+                <button type="submit" class="btn-primary full">Login</button>
 
-          <button type="submit" class="btn-primary full">Login</button>
+            </form>
 
-        </form>
-
-        <p class="auth-switch">Don't have an account? <a href="/register">Sign up</a></p>
-      </div>
+            <p class="auth-switch">Don't have an account? <a href="/register">Sign up</a></p>
+        </div>
 
     </div>
-  </div>
+</div>
 </body>
 
 </html>

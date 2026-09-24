@@ -1,10 +1,8 @@
 package group02.filmout.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import group02.filmout.entity.User;
@@ -13,15 +11,18 @@ import group02.filmout.repository.UserRepository;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public User save(User user) {
-        // Solo encriptamos si la contraseña no está ya encriptada (opcional según vuestra lógica)
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (user.getPassword() != null && !user.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         return userRepository.save(user);
     }
 
@@ -49,9 +50,8 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    // PATCH mejorado para JPA
     public User patch(int id, User updatedFields) {
-        User existingUser = findById(id); 
+        User existingUser = findById(id);
         if (existingUser != null) {
             if (updatedFields.getUserName() != null) {
                 existingUser.setUserName(updatedFields.getUserName());

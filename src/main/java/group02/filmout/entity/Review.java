@@ -12,97 +12,69 @@ import jakarta.persistence.Transient;
 @Entity
 @Table(name = "reviews")
 public class Review {
-  // Attributes
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
 
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  private User user;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-  @Transient
-  private Movie movie;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-  private int movieApiId;
-  private float grade;
-  private String comment;
+    @Transient
+    private Movie movie;
 
-  // Constructor
-  public Review() {};
-  public Review(User user, Movie movie, float grade) {
-    this.user = user;
-    this.movie = movie;
-    this.grade = grade;
-  }
+    private int movieApiId;
+    private float grade;
+    private String comment;
 
-  // Methods
-  public int getId() {
-    return id;
-  }
+    public Review() {}
 
-  public void setId(int id) {
-    this.id = id;
-  }
+    public Review(User user, Movie movie, float grade, String comment) {
+        this.user = user;
+        this.movie = movie;
+        this.grade = grade;
+        this.comment = comment;
+    }
 
-  public User getUser() {
-    return user;
-  }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-  public void setUser(User user) {
-    this.user = user;
-  }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-  public Movie getMovie() {
-    return movie;
-  }
+    public Movie getMovie() { return movie; }
+    public void setMovie(Movie movie) { this.movie = movie; }
 
-  public void setMovie(Movie movie) {
-    this.movie = movie;
-  }
+    public int getMovieApiId() { return movieApiId; }
+    public void setMovieApiId(int movieApiId) { this.movieApiId = movieApiId; }
 
-  public int getMovieApiId() {
-    return movieApiId;
-  }
+    public float getGrade() { return grade; }
+    public void setGrade(float grade) { this.grade = grade; }
 
-  public void setMovieApiId(int movieApiId) {
-    this.movieApiId = movieApiId;
-  }
+    public String getComment() { return comment; }
+    public void setComment(String comment) { this.comment = comment; }
 
-  public float getGrade() {
-    return grade;
-  }
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", userId=" + (user != null ? user.getId() : "null") + // Protegido
+                ", movieApiId=" + movieApiId +
+                ", grade=" + grade +
+                '}';
+    }
 
-  public void setGrade(float grade) {
-    this.grade = grade;
-  }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Review review = (Review) o;
+        return id != 0 && id == review.id;
+    }
 
-  public String getComment() {
-    return comment;
-  }
-
-  public void setComment(String comment) {
-    this.comment = comment;
-  }
-
-  @Override
-  public String toString() {
-    return "Review{" +
-        "id=" + id +
-        ", user=" + user +
-        ", movieApiId=" + movieApiId +
-        ", grade=" + grade +
-        '}';
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (o == null || getClass() != o.getClass())
-      return false;
-
-    Review review = (Review) o;
-    return id == review.id;
-  }
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

@@ -1,6 +1,6 @@
 package group02.filmout.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +14,13 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/profile")
     public String profile(HttpSession session, Model model) {
@@ -24,7 +29,7 @@ public class UserController {
             return "redirect:/login";
         }
         model.addAttribute("loggedUser", loggedUser);
-        return "User/form";
+        return "user/form";
     }
 
     @PostMapping("/profile/delete")
@@ -37,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping("/profile")
-    public String profilePost(@RequestParam String username, @RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
+    public String profilePost(@RequestParam String username, @RequestParam String email, @RequestParam(required = false) String password, HttpSession session, Model model) {
         User loggedUser = (User) session.getAttribute("loggedUser");
         if (loggedUser == null) {
             return "redirect:/login";
@@ -47,27 +52,28 @@ public class UserController {
         if (byUsername != null && byUsername.getId() != loggedUser.getId()) {
             model.addAttribute("error", "Username already taken.");
             model.addAttribute("loggedUser", loggedUser);
-            return "User/form";
+            return "user/form";
         }
 
         User byEmail = userService.findByEmail(email);
         if (byEmail != null && byEmail.getId() != loggedUser.getId()) {
             model.addAttribute("error", "Email already registered.");
             model.addAttribute("loggedUser", loggedUser);
-            return "User/form";
+            return "user/form";
         }
 
         User partial = new User();
         partial.setUserName(username);
         partial.setEmail(email);
+
         if (password != null && !password.isBlank()) {
-            partial.setPassword(password);
+            partial.setPassword(passwordEncoder.encode(password));
         }
 
         User saved = userService.patch(loggedUser.getId(), partial);
         session.setAttribute("loggedUser", saved);
         model.addAttribute("loggedUser", saved);
         model.addAttribute("success", "Profile updated successfully.");
-        return "User/form";
+        return "user/form";
     }
 }

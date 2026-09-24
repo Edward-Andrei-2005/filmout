@@ -2,157 +2,189 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Filmout</title>
-  <link rel="stylesheet" href="/css/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Home - Filmout</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body class="page">
-  <nav class="navbar">
+
+<!-- Barra de navegación -->
+<nav class="navbar">
     <div class="nav-logo">
-      <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
+        <a href="/home" style="text-decoration:none;">
+            <span class="logo-film">FILM</span><span class="logo-out">OUT</span>
+        </a>
     </div>
     <ul class="nav-links">
-      <li><a href="/" class="nav-link active">🏠<span>Home</span></a></li>
-      <li><a href="/events" class="nav-link">👥<span>Events</span></a></li>
+        <li><a href="/" class="nav-link active">🏠<span>Home</span></a></li>
+        <li><a href="/events" class="nav-link">👥<span>Events</span></a></li>
     </ul>
     <div class="nav-actions">
-      {{#loggedUser}}
-      <a href="/profile" class="nav-username">👤 {{userName}}</a>
-      <a href="/logout" class="nav-link">Logout</a>
-      {{/loggedUser}}
-      {{^loggedUser}}
-      <a href="/login" class="nav-link">Login</a>
-      <a href="/register" class="nav-link">Register</a>
-      {{/loggedUser}}
+        {{#loggedUser}}
+        <a href="/profile" class="nav-username">👤 {{userName}}</a>
+        <a href="/logout" class="nav-link">Logout</a>
+        {{/loggedUser}}
+        {{^loggedUser}}
+        <a href="/login" class="nav-link">Login</a>
+        <a href="/register" class="nav-link">Register</a>
+        {{/loggedUser}}
     </div>
-  </nav>
+</nav>
 
-  <main class="movies-page">
+<!-- Contenido principal -->
+<main class="movies-page">
     <h1 class="movies-title">Upcoming Movies</h1>
 
     <div class="movies-grid">
-      {{#movies}}
-      <div class="movie-card" data-modal="{{id}}">
-        <div class="movie-card-poster">
-          <img src="https://image.tmdb.org/t/p/w342{{poster_path}}" alt="{{title}}" />
-        </div>
-        <div class="movie-card-info">
-          <p class="movie-card-title">{{title}}</p>
-          <p class="movie-card-year">{{year}}</p>
-        </div>
-      </div>
-      {{/movies}}
-    </div>
-  </main>
+        {{#movies}}
 
-  <!-- MODALS -->
-  {{#movies}}
-  <div id="modal-{{id}}" class="modal-overlay hidden" data-modal-id="{{id}}">
-    <div class="modal-box">
-
-      <div class="modal-backdrop">
-        <img src="https://image.tmdb.org/t/p/w1280{{backdrop_path}}" class="modal-backdrop-img" alt="" />
-        <button class="modal-close" data-close="{{id}}">✕</button>
-      </div>
-
-      <div class="modal-content">
-        <div class="modal-left">
-          <img class="modal-poster" src="https://image.tmdb.org/t/p/w342{{poster_path}}" alt="{{title}}" />
-        </div>
-        <div class="modal-right">
-          <h2 class="modal-title">{{title}}</h2>
-          <div class="modal-meta">
-            <span class="modal-rating">⭐ {{vote_average}}</span>
-            <span class="modal-year">{{year}}</span>
-          </div>
-          <p class="modal-overview">{{overview}}</p>
-          <div class="modal-genres">
-            {{#genre_names}}<span class="genre-tag">{{.}}</span>{{/genre_names}}
-          </div>
-        </div>
-      </div>
-
-      <div class="modal-actions">
-        <a href="/events/new?movieId={{id}}" class="btn-primary modal-btn">👥 Create Event</a>
-      </div>
-
-      <div class="modal-reviews">
-        <h3 class="reviews-heading">Reviews</h3>
-
-        <div class="reviews-list">
-          {{#reviews}}
-          <div class="review-item">
-            <div class="review-item-header">
-              <span class="review-author">{{userName}}</span>
-              <div class="review-header-right">
-                <span class="review-stars-text">{{grade}}/5 ★</span>
-                {{#isOwner}}
-                <button type="button" class="review-edit-btn review-edit-toggle">✏️</button>
-                <form method="post" action="/reviews/{{id}}/delete" style="display:inline">
-                  <input type="hidden" name="movieApiId" value="{{movieApiId}}" />
-                  <button type="submit" class="review-delete-btn">🗑️</button>
-                </form>
-                {{/isOwner}}
-              </div>
+        <div class="movie-card" onclick="document.getElementById('modal-{{apiId}}').classList.remove('hidden')">
+            <div class="movie-card-poster">
+                <img src="https://image.tmdb.org/t/p/w342{{posterPath}}" alt="{{title}}">
             </div>
-            {{#hasComment}}<p class="review-comment">{{comment}}</p>{{/hasComment}}
-            {{#isOwner}}
-            <form method="post" action="/reviews/{{id}}/edit" class="review-edit-form hidden">
-              <input type="hidden" name="movieApiId" value="{{movieApiId}}" />
-              <input type="hidden" name="grade" value="{{grade}}" />
-              <div class="star-picker" data-selected="{{grade}}">
-                <span class="star-label">Rating:</span>
-                <span class="star" data-value="1">★</span>
-                <span class="star" data-value="2">★</span>
-                <span class="star" data-value="3">★</span>
-                <span class="star" data-value="4">★</span>
-                <span class="star" data-value="5">★</span>
-              </div>
-              <textarea name="comment" class="review-textarea review-edit-textarea">{{comment}}</textarea>
-              <div class="review-edit-actions">
-                <button type="button" class="btn-secondary review-cancel-edit">Cancel</button>
-                <button type="submit" class="btn-primary">Save</button>
-              </div>
-            </form>
-            {{/isOwner}}
-          </div>
-          {{/reviews}}
-          {{^reviews}}
-          <p class="reviews-empty">No reviews yet. Be the first!</p>
-          {{/reviews}}
+            <div class="movie-card-info">
+                <div class="movie-card-title">{{title}}</div>
+                <div class="movie-card-year">{{year}}</div>
+            </div>
         </div>
 
-        <!-- New review form: movieId uses movies context, form hidden via inverted section on attribute -->
-        <form method="post" action="/reviews/new" class="review-form" {{^loggedUser}}style="display:none"{{/loggedUser}}>
-          <input type="hidden" name="movieApiId" value="{{id}}" />
-          <input type="hidden" name="grade" value="0" />
-          <textarea name="comment" class="review-textarea" placeholder="Share your thoughts..." maxlength="500"></textarea>
-          <div class="review-form-footer">
-            <div class="star-picker" data-selected="0">
-              <span class="star-label">Your rating:</span>
-              <span class="star" data-value="1">★</span>
-              <span class="star" data-value="2">★</span>
-              <span class="star" data-value="3">★</span>
-              <span class="star" data-value="4">★</span>
-              <span class="star" data-value="5">★</span>
+        <div id="modal-{{apiId}}" class="modal-overlay hidden">
+            <div class="modal-box">
+                <!-- Botón de cerrar -->
+                <button class="modal-close" onclick="document.getElementById('modal-{{apiId}}').classList.add('hidden')">✕</button>
+
+                <!-- Cabecera del modal -->
+                <div class="modal-backdrop">
+                    <img class="modal-backdrop-img" src="https://image.tmdb.org/t/p/w780{{backdropPath}}" alt="{{title}}">
+                </div>
+
+                <!-- Información de la película -->
+                <div class="modal-content">
+                    <img class="modal-poster" src="https://image.tmdb.org/t/p/w342{{posterPath}}" alt="{{title}}">
+                    <div>
+                        <h2 class="modal-title">{{title}}</h2>
+                        <div class="modal-meta">
+                            <span class="modal-rating">★ {{voteAverage}}</span>
+                            <span class="modal-year">{{year}}</span>
+                        </div>
+                        <p class="modal-overview">{{overview}}</p>
+                        <div class="modal-genres">
+                            {{#genreNames}}
+                            <span class="genre-tag">{{.}}</span>
+                            {{/genreNames}}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón para crear evento -->
+                <div class="modal-actions">
+                    <form action="/events/new" method="get" style="flex:1;">
+                        <input type="hidden" name="movieId" value="{{apiId}}">
+                        <button type="submit" class="btn-primary full">Create Event</button>
+                    </form>
+                </div>
+
+                <!-- Reseña -->
+                <div class="modal-reviews">
+                    <h3 class="reviews-heading">Reviews</h3>
+
+                    <div class="reviews-list">
+                        {{#reviews}}
+                        <div class="review-item">
+                            <div class="review-item-header">
+                                <span class="review-author">{{userName}}</span>
+                                <div class="review-header-right">
+                                    <span class="review-stars-text">{{grade}}/5 ★</span>
+                                    {{#isOwner}}
+                                    <button type="button" class="review-edit-btn review-edit-toggle">✏️</button>
+                                    <form method="post" action="/reviews/{{id}}/delete" style="display:inline">
+                                        <input type="hidden" name="movieApiId" value="{{movieApiId}}" />
+                                        <button type="submit" class="review-delete-btn">🗑️</button>
+                                    </form>
+                                    {{/isOwner}}
+                                </div>
+                            </div>
+                            {{#hasComment}}<p class="review-comment">{{comment}}</p>{{/hasComment}}
+
+                            {{#isOwner}}
+                            <form method="post" action="/reviews/{{id}}/edit" class="review-edit-form hidden">
+                                <input type="hidden" name="movieApiId" value="{{movieApiId}}" />
+                                <input type="hidden" name="grade" value="{{grade}}" />
+                                <div class="star-picker" data-selected="{{grade}}">
+                                    <span class="star-label">Rating:</span>
+                                    <span class="star" data-value="1">★</span>
+                                    <span class="star" data-value="2">★</span>
+                                    <span class="star" data-value="3">★</span>
+                                    <span class="star" data-value="4">★</span>
+                                    <span class="star" data-value="5">★</span>
+                                </div>
+
+                                <label for="edit-comment-{{id}}" class="sr-only" style="display:none;">Edit comment</label>
+                                <textarea id="edit-comment-{{id}}" name="comment" class="review-textarea review-edit-textarea">{{comment}}</textarea>
+
+                                <div class="review-edit-actions">
+                                    <button type="button" class="btn-secondary review-cancel-edit">Cancel</button>
+                                    <button type="submit" class="btn-primary">Save</button>
+                                </div>
+                            </form>
+                            {{/isOwner}}
+                        </div>
+                        {{/reviews}}
+
+                        {{^reviews}}
+                        <p class="reviews-empty">No reviews yet. Be the first!</p>
+                        {{/reviews}}
+                    </div>
+
+                    {{#loggedUser}}
+                    <form method="post" action="/reviews/new" class="review-form">
+                        <input type="hidden" name="movieApiId" value="{{apiId}}" />
+                        <input type="hidden" name="grade" value="0" />
+
+                        <label for="new-comment-{{apiId}}" class="sr-only" style="display:none;">New comment</label>
+                        <textarea id="new-comment-{{apiId}}" name="comment" class="review-textarea" placeholder="Share your thoughts..." maxlength="500"></textarea>
+
+                        <div class="review-form-footer">
+                            <div class="star-picker" data-selected="0">
+                                <span class="star-label">Your rating:</span>
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <button type="submit" class="btn-primary review-submit-btn">Submit review</button>
+                        </div>
+                    </form>
+                    {{/loggedUser}}
+
+                    {{^loggedUser}}
+                    <p class="reviews-login-hint"><a href="/login">Log in</a> to write a review.</p>
+                    {{/loggedUser}}
+                </div>
+
             </div>
-            <button type="submit" class="btn-primary review-submit-btn">Submit review</button>
-          </div>
-        </form>
-        {{^loggedUser}}
-        <p class="reviews-login-hint"><a href="/login">Log in</a> to write a review.</p>
-        {{/loggedUser}}
-      </div>
+        </div>
 
+        {{/movies}}
     </div>
-  </div>
-  {{/movies}}
+</main>
 
-  <script src="/js/scripts.js"></script>
+<!-- Lógica para cerrar el modal si haces clic fuera de la caja -->
+<script>
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('modal-overlay')) {
+            event.target.classList.add('hidden');
+        }
+    });
+</script>
+
+<!-- Se inserta el js -->
+<script src="/js/scripts.js"></script>
+
 </body>
-
 </html>

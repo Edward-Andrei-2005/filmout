@@ -3,197 +3,103 @@ package group02.filmout.entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Movie {
-  // Attributes
-  private boolean adult, video;
-  private String backdrop_path, original_language, original_title, overview, poster_path, release_date, title;
-  private ArrayList<String> genre_names;
-  private int id_api, popularity, vote_count, id_hashmap;
-  private float vote_average;
-  private List<Map<String, Object>> reviews = new ArrayList<>();
 
-  // Constructor
-  public Movie() {};
-  public Movie(boolean adult, String backdrop_path, ArrayList<String> genre_names, int id_api,
-                String original_language, String original_title, String overview, 
-                int popularity, String poster_path, String release_date, String title,
-                boolean video, float vote_average, int vote_count, int id_hashmap
-              ) {
-    
-      this.adult = adult;
-      this.backdrop_path = backdrop_path;
-      this.genre_names = new ArrayList<>(genre_names);
-      this.id_api = id_api;
-      this.original_language = original_language;
-      this.original_title = original_title;
-      this.overview = overview;
-      this. popularity = popularity;
-      this.poster_path = poster_path;
-      this.release_date = release_date;
-      this.title = title;
-      this.video = video;
-      this.vote_average = vote_average;
-      this.vote_count = vote_count;
-      this.id_hashmap = id_hashmap;
-  }
+    private boolean adult;
+    private boolean video;
+    private String backdropPath;
+    private String originalLanguage;
+    private String originalTitle;
+    private String overview;
+    private String posterPath;
+    private String releaseDate;
+    private String title;
+    private List<String> genreNames;
+    private int apiId;
+    private int popularity;
+    private int voteCount;
+    private int hashmapId;
+    private float voteAverage;
+    private List<Map<String, Object>> reviews = new ArrayList<>();
 
-  // Methods
-  public boolean isAdult() {
-    return adult;
-  }
+    public Movie() {}
 
-  public String getBackdrop_path() {
-    return backdrop_path;
-  }
-
-  public ArrayList<String> getGenre_names() {
-    return new ArrayList<>(genre_names);
-  }
-
-  public int getId() {
-    return id_api;
-  }
-
-  public String getOriginal_language() {
-    return original_language;
-  }
-
-  public String getOriginal_title() {
-    return original_title;
-  }
-
-  public String getOverview() {
-    return overview;
-  }
-
-  public int getPopularity() {
-    return popularity;
-  }
-
-  public String getPoster_path() {
-    return poster_path;
-  }
-
-  public String getRelease_date() {
-    return release_date;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public boolean isVideo() {
-    return video;
-  }
-
-  public float getVote_average() {
-    return vote_average;
-  }
-
-  public int getVote_count() {
-    return vote_count;
-  }
-
-  public int getId_hashmap() {
-    return id_hashmap;
-  }
-
-  public void setAdult(boolean adult) {
-    this.adult = adult;
-  }
-
-  public void setBackdrop_path(String backdrop_path) {
-    this.backdrop_path = backdrop_path;
-  }
-
-  public void setGenre_names(ArrayList<String> genre_names) {
-    this.genre_names = new ArrayList<>(genre_names);
-  }
-
-  public void setId_api(int id_api) {
-    this.id_api = id_api;
-  }
-
-  public void setOriginal_language(String original_language) {
-    this.original_language = original_language;
-  }
-
-  public void setOriginal_title(String original_title) {
-    this.original_title = original_title;
-  }
-
-  public void setOverview(String overview) {
-    this.overview = overview;
-  }
-
-  public void setPopularity(int popularity) {
-    this.popularity = popularity;
-  }
-
-  public void setPoster_path(String poster_path) {
-    this.poster_path = poster_path;
-  }
-
-  public void setRelease_date(String release_date) {
-    this.release_date = release_date;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public void setVideo(boolean video) {
-    this.video = video;
-  }
-
-  public void setVote_average(float vote_average) {
-    this.vote_average = vote_average;
-  }
-
-  public void setVote_count(int vote_count) {
-    this.vote_count = vote_count;
-  }
-
-  public void setId_hashmap(int id_hashmap) {
-    this.id_hashmap = id_hashmap;
-  }
-
-  public List<Map<String, Object>> getReviews() { return reviews; }
-  public void setReviews(List<Map<String, Object>> reviews) { this.reviews = reviews; }
-
-  public String getYear() {
-    if (release_date != null && release_date.length() >= 4) {
-      return release_date.substring(0, 4);
+    public Movie(boolean adult, String backdropPath, List<String> genreNames, int apiId,
+                 String originalLanguage, String originalTitle, String overview,
+                 int popularity, String posterPath, String releaseDate, String title,
+                 boolean video, float voteAverage, int voteCount, int hashmapId) {
+        this.adult = adult;
+        this.backdropPath = backdropPath;
+        this.genreNames = genreNames != null ? new ArrayList<>(genreNames) : new ArrayList<>();
+        this.apiId = apiId;
+        this.originalLanguage = originalLanguage;
+        this.originalTitle = originalTitle;
+        this.overview = overview;
+        this.popularity = popularity;
+        this.posterPath = posterPath;
+        this.releaseDate = releaseDate;
+        this.title = title;
+        this.video = video;
+        this.voteAverage = voteAverage;
+        this.voteCount = voteCount;
+        this.hashmapId = hashmapId;
     }
-    return "";
-  }
 
+    public void setAdult(boolean adult) { this.adult = adult; }
 
-  /* 
-  @Override
-  public String toString() {
-    return "Movie{" +
-        "id=" + id +
-        ", duration=" + duration +
-        ", year=" + year +
-        ", grade=" + grade +
-        ", title='" + title + '\'' +
-        ", gender='" + gender + '\'' +
-        ", description='" + description + '\'' +
-        ", cover='" + cover + '\'' +
-        '}';
-  }
-  */
+    public void setBackdropPath(String backdropPath) { this.backdropPath = backdropPath; }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (o == null || getClass() != o.getClass())
-      return false;
+    public List<String> getGenreNames() { return genreNames != null ? new ArrayList<>(genreNames) : new ArrayList<>(); }
+    public void setGenreNames(List<String> genreNames) { this.genreNames = genreNames != null ? new ArrayList<>(genreNames) : new ArrayList<>(); }
 
-    Movie movie = (Movie) o;
-    return id_api == movie.id_api;
-  }
+    public int getApiId() { return apiId; }
+    public void setApiId(int apiId) { this.apiId = apiId; }
+
+    public void setOriginalLanguage(String originalLanguage) { this.originalLanguage = originalLanguage; }
+
+    public void setOriginalTitle(String originalTitle) { this.originalTitle = originalTitle; }
+
+    public void setOverview(String overview) { this.overview = overview; }
+
+    public void setPopularity(int popularity) { this.popularity = popularity; }
+
+    public void setPosterPath(String posterPath) { this.posterPath = posterPath; }
+
+    public void setReleaseDate(String releaseDate) { this.releaseDate = releaseDate; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public void setVideo(boolean video) { this.video = video; }
+
+    public void setVoteAverage(float voteAverage) { this.voteAverage = voteAverage; }
+
+    public void setVoteCount(int voteCount) { this.voteCount = voteCount; }
+
+    public int getHashmapId() { return hashmapId; }
+    public void setHashmapId(int hashmapId) { this.hashmapId = hashmapId; }
+
+    public void setReviews(List<Map<String, Object>> reviews) { this.reviews = reviews; }
+
+    public String getYear() {
+        if (releaseDate != null && releaseDate.length() >= 4) {
+            return releaseDate.substring(0, 4);
+        }
+        return "";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return apiId == movie.apiId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(apiId);
+    }
 }

@@ -2,7 +2,6 @@ package group02.filmout.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import group02.filmout.entity.Review;
@@ -11,8 +10,11 @@ import group02.filmout.repository.ReviewRepository;
 @Service
 public class ReviewService {
 
-    @Autowired
-    private ReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
+
+    public ReviewService(ReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
+    }
 
     public Review save(Review review) {
         return reviewRepository.save(review);
@@ -41,6 +43,8 @@ public class ReviewService {
     public Review patch(int id, Review updatedFields) {
         Review existingReview = findById(id);
         if (existingReview == null) return null;
+
+        // Al usar float, un 0 significa que no se ha enviado nota o que la nota es 0.
         if (updatedFields.getGrade() != 0) {
             existingReview.setGrade(updatedFields.getGrade());
         }

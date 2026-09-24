@@ -5,5 +5,4 @@ import group02.filmout.entity.Cinema;
 
 public interface CinemaRepository extends JpaRepository<Cinema, Integer> {
 
-    Cinema findByName(String name);
 }
