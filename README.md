@@ -1,6 +1,6 @@
 # Filmout
 
-### Grupo 02 Proyecto para Sistemas Distribuidos.
+### Proyecto para Sistemas Distribuidos.
 
 ---
 
