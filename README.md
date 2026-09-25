@@ -6,6 +6,8 @@
 
 ## Carlos Martin Garcia
 
+## Edward Andrei Radoi
+
 ## Anass Chikou El Mahraoui
 
 ## Manuel Alos de la Vega
@@ -27,24 +29,23 @@ Universidad Rey Juan Carlos I. Tercero de Ingeniería Informática. Campus de Vi
 
 ## Sobre el proyecto
 
-Filmout es una aplicación web que sirve para organizar eventos de quedadas para ver películas. El sistema permite a los usuarios registrarse, crear eventos en diferentes cines, unirse a eventos creados por otros usuarios, consultar información sobre películas y dejar reseñas o valoraciones sobre las mismas. 
+Filmout es una página web que sirve para organizar quedadas para ver películas. El sistema permite a los usuarios registrarse, crear eventos en diferentes cines, unirse a eventos creados por otros usuarios, consultar información sobre películas y dejar reseñas sobre las mismas. 
 
-**Nota importante sobre la Base de Datos:** Actualmente la web soporta una base de datos online (MySQL a través de Aiven) configurada para el entorno de producción, pero esta solo estará activa hasta el **31 de octubre de 2026**. Por lo que también se ha implementado en el `pom.xml` y se ha dejado comentada la implementación de la base de datos H2 en local. Si se desea probar el proyecto después de esa fecha, bastará con descomentar dicha dependencia para hacerlo funcionar localmente.
+**Nota sobre la Base de Datos:** Actualmente la web soporta una base de datos online de MySQL, pero esta solo estará activa hasta el **31 de octubre de 2026**. Por lo que también se ha implementado en el `pom.xml` y se ha dejado comentada la implementación de la base de datos H2 en local. Si se desea probar el proyecto después de esa fecha, bastará con descomentar dicha dependencia para hacerlo funcionar localmente.
 
 ---
 ## Diseño Inicial y Planificación
 
-Antes de comenzar con el desarrollo del código, se elaboraron una serie de bocetos y diagramas de secuencia para definir la arquitectura visual y el flujo de interacciones del usuario con la plataforma. Estos esquemas sirvieron como guía principal durante todo el proceso de implementación.
+Antes de comenzar con el desarrollo del código, se elaboraron una serie de bocetos y diagramas de secuencia para definir la arquitectura visual y el flujo de interacciones del usuario con la plataforma. Estos esquemas sirvieron como guía principal durante fases iniciales del proceso de implementación.
 
-### Wireframes de la Interfaz
+### Conexiones en la Interfaz
 
-El diseño inicial contemplaba una estructura muy clara dividida en dos ventanas principales:
+El diseño inicial contemplaba una estructura clara dividida en dos ventanas principales:
 
-*   **Ventana de Inicio (Movies):** Diseñada exclusivamente para visualizar el catálogo de películas disponibles. Desde aquí, el usuario puede explorar las opciones y acceder a la creación de eventos.
-*   **Ventana de Eventos (Events):** Un panel de control personalizado donde el usuario puede gestionar su actividad social. Se divide en los eventos que ha creado (con permisos para modificarlos o eliminarlos) y los eventos a los que se ha unido (con la opción de abandonarlos).
+*   **Ventana de Inicio:** Diseñada para visualizar el catálogo de películas disponibles. Desde aquí, el usuario puede explorar las opciones y acceder a la creación de eventos.
+*   **Ventana de Eventos:** Un panel de control personalizado donde el usuario puede gestionar su actividad. Se divide en los eventos que ha creado y los eventos a los que se ha unido.
 
 <img width="1468" height="756" alt="Bocetos iniciales de las ventanas Movies y Events" src="https://github.com/user-attachments/assets/7afa717b-5f09-4bb2-9563-81b11dbad6f1" />
-
 
 > [Bocetos conceptuales de la distribución de la interfaz de usuario]
 
@@ -52,10 +53,12 @@ El diseño inicial contemplaba una estructura muy clara dividida en dos ventanas
 
 Para asegurar una correcta comunicación entre el frontend, el backend y la base de datos, se plantearon los flujos de las operaciones clave del sistema a través de diagramas de secuencia:
 
-#### Gestión de Eventos (Creación, Modificación y Eliminación)
+#### Gestión de Eventos: Creación, Modificación y Eliminación
 
 *   **Creación de evento:** El flujo comienza cuando el usuario selecciona una película. El sistema consulta la base de datos de cines para ofrecer las localizaciones disponibles. Tras introducir lugar, fecha, aforo y descripción, el evento queda registrado.
+*   
 *   **Modificación:** Sigue un patrón similar a la creación, permitiendo actualizar los detalles de un evento existente, siempre y cuando el usuario sea el creador del mismo.
+*   
 *   **Eliminación:** El usuario creador solicita borrar el evento, y el gestor ejecuta la orden directamente sobre la base de datos de eventos, confirmando la acción.
 
 
@@ -72,7 +75,7 @@ Para asegurar una correcta comunicación entre el frontend, el backend y la base
 
 > [Flujo de interacción para la eliminación y modificación de eventos]
 
-#### Interacción Social (Unirse y Salirse)
+#### Interacción: Unirse y Salirse
 
 *   **Unirse a un evento:** El gestor filtra y muestra al usuario únicamente aquellos eventos que aún no han alcanzado su aforo máximo. Una vez seleccionado, el usuario se añade a la lista de asistentes.
 *   **Salirse de un evento:** Una operación directa donde el usuario indica el evento que desea abandonar, y el sistema lo elimina de la lista de asistentes correspondientes en la base de datos.
@@ -83,25 +86,38 @@ Para asegurar una correcta comunicación entre el frontend, el backend y la base
 
 > [Flujo de interacción para la gestión de asistencia a eventos]
 --- 
+## Flujo y funcionamiento final
 
-## Carpetas de este repositorio
+Previamente hemos especificado unos flujos de eventos que usamos para comenzar nuestro desarrollo, pero la versión final de la página web tiene ciertos cambios con respecto a la idea original, además originalmente no se concibió la función de escribir reseñas
 
-### src/main/java/group02/filmout
+### Pantalla principal
 
-Carpeta la cual contiene todos los códigos backend desarrollados en Java con Spring Boot. No hay fotos ni explicaciones de diseño visual aquí, solo la arquitectura interna. 
-En este código se encuentra la lógica y el funcionamiento final del proyecto Filmout. Una vez se tenga el servidor arrancado, este código hace que funcione tal y como se espera, dividiendo el sistema en Controladores (MVC y API REST), Servicios, Repositorios y Entidades.
+En la versión final, la pantalla principal mantiene varias ideas de los bocetos originales. El flujo comienza cuando seleccionas una película, para escribir una reseña se ha de cumplir el requisito de tener la sesión iniciada, si no se ha iniciado se podrá iniciar desde esta pantalla o incluso crear la cuenta, lo mismo si se clica en el botón de crear evento. Una vez cumplido este requisito, se podrá escribir una reseña y dejar una puntuación de 0 a 5 estrellas, esta reseña se podrá editar y eliminar desde la misma pestaña de la página.
 
-### src/main/resources/templates y static
+Por otro lado, para crear un evento se podrá hacer desde esta pantalla y su proceso es idéntico a como se pensó en un principio.
 
-Contiene los planos visuales y estructurales para nuestra web. En la carpeta `templates` se encuentran los archivos HTML integrados con el motor Mustache. En la carpeta `static` se alojan los archivos CSS y JS. Si se deseara modificar el diseño visual o la interactividad del proyecto, se recomienda alterar estos archivos.
+### Pantalla de Eventos
+
+En esta pantalla se puede consultar los eventos que has creado y los eventos publicos a los que te puedes unir, desde aquí se puede gestionar el eliminar eventos, o entrar o salirse a un evento público.
+
+---
+## Carpetas y ficheros destacadas de este repositorio
+
+### filmout
+
+Carpeta la cual contiene todos los códigos desarrollados en Java con Spring Boot. En este código se encuentra la lógica y el funcionamiento final del proyecto Filmout. Una vez se tenga el servidor arrancado, este código hace que funcione tal y como se espera, dividiendo el sistema en Controladores, Servicios, Repositorios y Entidades.
+
+### templates y static
+
+Contiene los planos visuales y estructurales para nuestra web. En la carpeta `templates` se encuentran los archivos HTML. En la carpeta `static` se alojan los archivos CSS y JS. Si se deseara modificar el diseño visual o la interactividad del proyecto, se deberían alterar estos archivos.
 
 ### postman
 
-Carpeta que contiene las colecciones y variables exportadas de Postman. Son archivos JSON y YAML para experimentar el correcto funcionamiento de cada módulo de la API REST (usuarios, cines, películas, eventos y reseñas) por separado, simulando peticiones HTTP externas.
+Carpeta que contiene las variables exportadas de Postman. Son archivos JSON y YAML para experimentar el correcto funcionamiento de cada módulo de la API REST por separado, simulando peticiones HTTP externas.
 
 ### application.properties y schema.sql
 
-Archivos de configuración ubicados en `src/main/resources`. `schema.sql` contiene el diseño digitalizado de las tablas de nuestra base de datos. El archivo de propiedades contiene las credenciales de conexión al servidor online y las claves de APIs externas (como TMDB) necesarias para poblar el catálogo de películas.
+Archivos de configuración ubicados en `resources`. `schema.sql` contiene el diseño digitalizado de las tablas de nuestra base de datos. El archivo de propiedades contiene las credenciales de conexión al servidor online y la clave API externa de TMDB necesarias para poblar el catálogo de películas.
 
 
 
