@@ -34,6 +34,52 @@ Filmout es una aplicación web que sirve para organizar eventos de quedadas para
 **Nota importante sobre la Base de Datos:** Actualmente la web soporta una base de datos online (MySQL a través de Aiven) configurada para el entorno de producción, pero esta solo estará activa hasta el **31 de octubre de 2026**. Por lo que también se ha implementado en el `pom.xml` y se ha dejado comentada la implementación de la base de datos H2 en local. Si se desea probar el proyecto después de esa fecha, bastará con descomentar dicha dependencia para hacerlo funcionar localmente.
 
 ---
+## Diseño Inicial y Planificación
+
+Antes de comenzar con el desarrollo del código, se elaboraron una serie de bocetos y diagramas de secuencia para definir la arquitectura visual y el flujo de interacciones del usuario con la plataforma. Estos esquemas sirvieron como guía principal durante todo el proceso de implementación.
+
+### Wireframes de la Interfaz
+
+El diseño inicial contemplaba una estructura muy clara dividida en dos ventanas principales:
+
+*   **Ventana de Inicio (Movies):** Diseñada exclusivamente para visualizar el catálogo de películas disponibles. Desde aquí, el usuario puede explorar las opciones y acceder a la creación de eventos.
+*   **Ventana de Eventos (Events):** Un panel de control personalizado donde el usuario puede gestionar su actividad social. Se divide en los eventos que ha creado (con permisos para modificarlos o eliminarlos) y los eventos a los que se ha unido (con la opción de abandonarlos).
+
+<!-- INSERTA AQUÍ LA URL DE LA IMAGEN DE LOS BOCETOS (image_9cb145.png) -->
+<img width="100%" alt="Bocetos iniciales de las ventanas Movies y Events" src="URL_DE_TU_IMAGEN_AQUI" />
+
+> [Bocetos conceptuales de la distribución de la interfaz de usuario]
+
+### Diagramas de Secuencia
+
+Para asegurar una correcta comunicación entre el frontend, el backend y la base de datos, se plantearon los flujos de las operaciones clave del sistema a través de diagramas de secuencia:
+
+#### Gestión de Eventos (Creación, Modificación y Eliminación)
+
+*   **Creación de evento:** El flujo comienza cuando el usuario selecciona una película. El sistema consulta la base de datos de cines para ofrecer las localizaciones disponibles. Tras introducir lugar, fecha, aforo y descripción, el evento queda registrado.
+*   **Modificación:** Sigue un patrón similar a la creación, permitiendo actualizar los detalles de un evento existente, siempre y cuando el usuario sea el creador del mismo.
+*   **Eliminación:** El usuario creador solicita borrar el evento, y el gestor ejecuta la orden directamente sobre la base de datos de eventos, confirmando la acción.
+
+<!-- INSERTA AQUÍ LA URL DE LA IMAGEN DE CREACIÓN (image_9cb160.png) -->
+<img width="100%" alt="Diagrama de secuencia: Crear un evento" src="URL_DE_TU_IMAGEN_AQUI" />
+
+> [Flujo de interacción para la creación de un nuevo evento]
+
+<!-- INSERTA AQUÍ LAS URL DE LAS IMÁGENES DE ELIMINAR Y MODIFICAR (image_9cb165.png y image_9cb181.png) -->
+<img width="100%" alt="Diagrama de secuencia: Eliminar y modificar un evento" src="URL_DE_TU_IMAGEN_AQUI" />
+
+> [Flujo de interacción para la eliminación y modificación de eventos]
+
+#### Interacción Social (Unirse y Salirse)
+
+*   **Unirse a un evento:** El gestor filtra y muestra al usuario únicamente aquellos eventos que aún no han alcanzado su aforo máximo. Una vez seleccionado, el usuario se añade a la lista de asistentes.
+*   **Salirse de un evento:** Una operación directa donde el usuario indica el evento que desea abandonar, y el sistema lo elimina de la lista de asistentes correspondientes en la base de datos.
+
+<!-- INSERTA AQUÍ LAS URL DE LAS IMÁGENES DE UNIRSE Y SALIRSE (image_9cb187.png y image_9cb1a2.png) -->
+<img width="100%" alt="Diagramas de secuencia: Unirse y salirse de un evento" src="URL_DE_TU_IMAGEN_AQUI" />
+
+> [Flujo de interacción para la gestión de asistencia a eventos]
+--- 
 
 ## Carpetas de este repositorio
 
