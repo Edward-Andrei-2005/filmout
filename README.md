@@ -15,13 +15,11 @@
 Universidad Rey Juan Carlos I. Tercero de Ingeniería Informática. Campus de Vicálvaro
 ---
 
-<!-- INSERTA AQUÍ LA URL DE LA IMAGEN DE LA PANTALLA PRINCIPAL -->
-<img width="100%" alt="Pantalla principal de Filmout" src="URL_DE_TU_IMAGEN_AQUI" />
+<img width="1462" height="755" alt="Pantalla principal de Filmout" src="https://github.com/user-attachments/assets/bf20425c-425c-4c55-ba7d-9cc82a3e0328" />
 
 > [Vista principal de la aplicación web Filmout]
 
-<!-- INSERTA AQUÍ LA URL DE OTRA IMAGEN RELEVANTE (Ej: Vista de eventos o diagrama de BD) -->
-<img width="100%" alt="Vista de eventos" src="URL_DE_TU_IMAGEN_AQUI" />
+<img width="1462" height="755" alt="Pantalla de vista de eventos" src="https://github.com/user-attachments/assets/ae100fde-b92f-4e13-b3e3-a87ea2cde774" />
 
 > [Prototipo digital y vista de organización de quedadas cinematográficas]
 
@@ -45,8 +43,8 @@ El diseño inicial contemplaba una estructura muy clara dividida en dos ventanas
 *   **Ventana de Inicio (Movies):** Diseñada exclusivamente para visualizar el catálogo de películas disponibles. Desde aquí, el usuario puede explorar las opciones y acceder a la creación de eventos.
 *   **Ventana de Eventos (Events):** Un panel de control personalizado donde el usuario puede gestionar su actividad social. Se divide en los eventos que ha creado (con permisos para modificarlos o eliminarlos) y los eventos a los que se ha unido (con la opción de abandonarlos).
 
-<!-- INSERTA AQUÍ LA URL DE LA IMAGEN DE LOS BOCETOS (image_9cb145.png) -->
-<img width="100%" alt="Bocetos iniciales de las ventanas Movies y Events" src="URL_DE_TU_IMAGEN_AQUI" />
+<img width="1468" height="756" alt="Bocetos iniciales de las ventanas Movies y Events" src="https://github.com/user-attachments/assets/7afa717b-5f09-4bb2-9563-81b11dbad6f1" />
+
 
 > [Bocetos conceptuales de la distribución de la interfaz de usuario]
 
@@ -60,13 +58,17 @@ Para asegurar una correcta comunicación entre el frontend, el backend y la base
 *   **Modificación:** Sigue un patrón similar a la creación, permitiendo actualizar los detalles de un evento existente, siempre y cuando el usuario sea el creador del mismo.
 *   **Eliminación:** El usuario creador solicita borrar el evento, y el gestor ejecuta la orden directamente sobre la base de datos de eventos, confirmando la acción.
 
-<!-- INSERTA AQUÍ LA URL DE LA IMAGEN DE CREACIÓN (image_9cb160.png) -->
-<img width="100%" alt="Diagrama de secuencia: Crear un evento" src="URL_DE_TU_IMAGEN_AQUI" />
+
+<img width="1514" height="735" alt="Diagrama de secuencia: Crear un Evento" src="https://github.com/user-attachments/assets/2bdd3f1e-6044-4f91-8b56-431837d215fa" />
+
 
 > [Flujo de interacción para la creación de un nuevo evento]
 
-<!-- INSERTA AQUÍ LAS URL DE LAS IMÁGENES DE ELIMINAR Y MODIFICAR (image_9cb165.png y image_9cb181.png) -->
-<img width="100%" alt="Diagrama de secuencia: Eliminar y modificar un evento" src="URL_DE_TU_IMAGEN_AQUI" />
+
+<img width="1085" height="526" alt="Diagrama de secuencia: Eliminar" src="https://github.com/user-attachments/assets/ddeff42a-e7fa-4c31-9e13-13cec19e2da0" />
+
+<img width="1484" height="696" alt="Diagrama de secuencia: Modificar" src="https://github.com/user-attachments/assets/9b73fa65-76ca-48bb-a845-7345c327f520" />
+
 
 > [Flujo de interacción para la eliminación y modificación de eventos]
 
@@ -75,8 +77,9 @@ Para asegurar una correcta comunicación entre el frontend, el backend y la base
 *   **Unirse a un evento:** El gestor filtra y muestra al usuario únicamente aquellos eventos que aún no han alcanzado su aforo máximo. Una vez seleccionado, el usuario se añade a la lista de asistentes.
 *   **Salirse de un evento:** Una operación directa donde el usuario indica el evento que desea abandonar, y el sistema lo elimina de la lista de asistentes correspondientes en la base de datos.
 
-<!-- INSERTA AQUÍ LAS URL DE LAS IMÁGENES DE UNIRSE Y SALIRSE (image_9cb187.png y image_9cb1a2.png) -->
-<img width="100%" alt="Diagramas de secuencia: Unirse y salirse de un evento" src="URL_DE_TU_IMAGEN_AQUI" />
+<img width="1092" height="621" alt="Unirse a un evento" src="https://github.com/user-attachments/assets/ecb39dd0-20cc-4072-acd3-f891690e39d8" />
+
+<img width="1077" height="496" alt="Salirse de un evento" src="https://github.com/user-attachments/assets/76f480ef-7fe6-4016-8819-fb35aa7641ad" />
 
 > [Flujo de interacción para la gestión de asistencia a eventos]
 --- 
@@ -100,14 +103,8 @@ Carpeta que contiene las colecciones y variables exportadas de Postman. Son arch
 
 Archivos de configuración ubicados en `src/main/resources`. `schema.sql` contiene el diseño digitalizado de las tablas de nuestra base de datos. El archivo de propiedades contiene las credenciales de conexión al servidor online y las claves de APIs externas (como TMDB) necesarias para poblar el catálogo de películas.
 
-<img width="1468" height="756" alt="image" src="https://github.com/user-attachments/assets/7afa717b-5f09-4bb2-9563-81b11dbad6f1" />
 
-<img width="1514" height="735" alt="image" src="https://github.com/user-attachments/assets/2bdd3f1e-6044-4f91-8b56-431837d215fa" />
 
-<img width="1085" height="526" alt="image" src="https://github.com/user-attachments/assets/ddeff42a-e7fa-4c31-9e13-13cec19e2da0" />
 
-<img width="1484" height="696" alt="image" src="https://github.com/user-attachments/assets/9b73fa65-76ca-48bb-a845-7345c327f520" />
 
-<img width="1092" height="621" alt="image" src="https://github.com/user-attachments/assets/ecb39dd0-20cc-4072-acd3-f891690e39d8" />
 
-<img width="1077" height="496" alt="image" src="https://github.com/user-attachments/assets/76f480ef-7fe6-4016-8819-fb35aa7641ad" />
