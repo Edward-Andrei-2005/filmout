@@ -50,14 +50,19 @@
             <artifactId>spring-boot-starter-mustache</artifactId>
         </dependency>
 
-        <!-- Base de datos en memoria -->
+        <!-- Base de datos en memoria y consola web -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Base de datos online -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-h2console</artifactId>
+        </dependency>
+
+        <!-- Base de datos online / MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
