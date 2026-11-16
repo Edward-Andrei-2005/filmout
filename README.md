@@ -31,7 +31,7 @@ Universidad Rey Juan Carlos I. Tercero de Ingeniería Informática. Campus de Vi
 
 Filmout es una página web que sirve para organizar quedadas para ver películas. El sistema permite a los usuarios registrarse, crear eventos en diferentes cines, unirse a eventos creados por otros usuarios, consultar información sobre películas y dejar reseñas sobre las mismas. 
 
-**Nota sobre la Base de Datos:** Actualmente la web soporta una base de datos online de MySQL, pero esta solo estará activa hasta el **31 de octubre de 2026**. Por lo que también se ha implementado en el `pom.xml` y se ha dejado comentada la implementación de la base de datos H2 en local. Si se desea probar el proyecto después de esa fecha, bastará con descomentar dicha dependencia para hacerlo funcionar localmente.
+**Nota sobre la Base de Datos:** Actualmente la web solo soporta una base de datos local H2 por lo que, si se quiere usar este repositorio se deberá configura una base de datos en el propio entorno de desarrollo. Por otro lado, se han dejado comentadas ciertas líneas de código necesarias en el caso de que alguien quiera usar la página web y quiera implementar una base de datos de terceros. También se ha implementado en el `pom.xml`. Si se desea probar el proyecto bastará con buscar las líneas pertinentes, descomentarlas para configurarlo y listo.
 
 ---
 ## Diseño Inicial y Planificación
