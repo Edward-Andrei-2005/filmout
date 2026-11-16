@@ -31,7 +31,11 @@ Universidad Rey Juan Carlos I. Tercero de Ingeniería Informática. Campus de Vi
 
 Filmout es una página web que sirve para organizar quedadas para ver películas. El sistema permite a los usuarios registrarse, crear eventos en diferentes cines, unirse a eventos creados por otros usuarios, consultar información sobre películas y dejar reseñas sobre las mismas. 
 
-**Nota sobre la Base de Datos:** Actualmente la web solo soporta una base de datos local H2 por lo que, si se quiere usar este repositorio se deberá configura una base de datos en el propio entorno de desarrollo. Por otro lado, se han dejado comentadas ciertas líneas de código necesarias en el caso de que alguien quiera usar la página web y quiera implementar una base de datos de terceros. También se ha implementado en el `pom.xml`. Si se desea probar el proyecto bastará con buscar las líneas pertinentes, descomentarlas para configurarlo y listo.
+<img width="1905" height="886" alt="image" src="https://github.com/user-attachments/assets/1d7431c5-fec0-41d7-9d56-f65902cdffb8" />
+
+> [Consola de la base de datos H2: acceder mediante http://localhost:8080/h2-console/]
+ 
+**Nota sobre la Base de Datos:** Actualmente la web solo soporta una base de datos local H2 por lo que, si se quiere usar este repositorio se deberá configura una base de datos en el propio entorno de desarrollo. Por otro lado, se han dejado comentadas ciertas líneas de código necesarias en el caso de que alguien quiera usar la página web y quiera implementar una base de datos de terceros. También se ha implementado en el `pom.xml`. Si se desea probar el proyecto bastará con buscar las líneas pertinentes, descomentarlas para configurarlo y listo. Para entrar en la consola de la base de datos introducir Usuario: sa, Contraseña vacía y JDBC URL: jdbc:h2:mem:filmoutdb
 
 ---
 ## Diseño Inicial y Planificación
